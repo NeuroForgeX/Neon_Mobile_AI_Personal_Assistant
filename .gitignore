@@ -50,3 +50,5 @@ local.properties
 /gradle/wrapper/
 /gradlew
 /gradlew.bat
+/.run/
+/.kotlin/
