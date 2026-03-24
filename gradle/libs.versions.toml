@@ -5,17 +5,30 @@ junit = "4.13.2"
 junitVersion = "1.1.5"
 espressoCore = "3.5.1"
 appcompat = "1.6.1"
+langchain4jBom = "1.12.2"
+langchain4jDocumentParserApachePdf = "0.29.1"
 material = "1.10.0"
 constraintlayout = "2.1.4"
 navigationFragmentKtx = "2.6.0"
 navigationUiKtx = "2.6.0"
+swiperefreshlayout = "1.2.0"
+recyclerview = "1.4.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-recyclerview = { module = "androidx.recyclerview:recyclerview", version.ref = "recyclerview" }
+androidx-swiperefreshlayout = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version.ref = "swiperefreshlayout" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+langchain4j = { module = "dev.langchain4j:langchain4j" }
+langchain4j-bom = { module = "dev.langchain4j:langchain4j-bom", version.ref = "langchain4jBom" }
+langchain4j-document-parser-apache-pdf = { module = "dev.langchain4j:langchain4j-document-parser-apache-pdf", version.ref = "langchain4jDocumentParserApachePdf" }
+langchain4j-document-parser-apache-pdfbox = { module = "dev.langchain4j:langchain4j-document-parser-apache-pdfbox" }
+langchain4j-embeddings-all-minilm-l6-v2 = { module = "dev.langchain4j:langchain4j-embeddings-all-minilm-l6-v2" }
+langchain4j-ollama = { module = "dev.langchain4j:langchain4j-ollama" }
+langchain4j-open-ai = { module = "dev.langchain4j:langchain4j-open-ai" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 androidx-navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }

@@ -11,7 +11,7 @@ import com.forge.bright.databinding.FragmentFirstBinding
 import java.text.SimpleDateFormat
 import java.util.*
 
-data class ChatMessage(val message: String, val timestamp: String, isUser: Boolean = true)
+data class ChatMessage(val message: String, val timestamp: String, val isUser: Boolean = true)
 
 class ChatAdapter(private var messages: List<ChatMessage>) : androidx.recyclerview.widget.RecyclerView.Adapter<ChatAdapter.ChatViewHolder>() {
     
