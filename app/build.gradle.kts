@@ -14,30 +14,55 @@ android {
         applicationId = "com.forge.bright"
         minSdk = 30
         targetSdk = 36
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 2
+        versionName = "1.0-rc1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    // Signing configurations
+    signingConfigs {
+        create("release") {
+            // For now, use debug keystore for release builds
+            // TODO: Configure proper release keystore for production
+            storeFile = file(System.getProperty("user.home") + "/.android/debug.keystore")
+            storePassword = "android"
+            keyAlias = "androiddebugkey"
+            keyPassword = "android"
+        }
+    }
+
     buildTypes {
-        release {
+        debug {
+            isDebuggable = true
             isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
+            isShrinkResources = false
+        }
+
+        release {
+            isDebuggable = false
+            isMinifyEnabled = true
+            isShrinkResources = true
+            signingConfig = signingConfigs.getByName("release")
+        }
+
+        create("releaseCandidate") {
+            initWith(getByName("release"))
+            versionNameSuffix = "-rc"
+            isDebuggable = false
+            isMinifyEnabled = false
+            isShrinkResources = false
         }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_24
         targetCompatibility = JavaVersion.VERSION_24
     }
-    
+
     kotlin {
         jvmToolchain(24)
     }
-    
+
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -58,17 +83,18 @@ dependencies {
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.androidx.recyclerview)
     implementation(libs.androidx.swiperefreshlayout)
-
-    // Import the BOM
     implementation(platform(libs.langchain4j.bom))
-
-    // Now you can omit versions for specific modules
     implementation(libs.langchain4j)
-    implementation(libs.langchain4j.open.ai)
-    implementation(libs.langchain4j.ollama)
-    implementation(libs.langchain4j.document.parser.apache.pdfbox)
+    // implementation(libs.langchain4j.document.parser.apache.pdfbox)
     implementation(libs.langchain4j.embeddings.all.minilm.l6.v2)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    implementation("dev.langchain4j:langchain4j-jlama:latest") {
+        exclude(group = "com.google.code.findbugs", module = "jsr305")
+    }
+    implementation("com.github.tjake:jlama-native:+") {
+        exclude(group = "com.google.code.findbugs", module = "jsr305")
+    }
 }

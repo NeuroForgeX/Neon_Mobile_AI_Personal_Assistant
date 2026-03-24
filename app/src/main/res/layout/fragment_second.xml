@@ -4,7 +4,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".SecondFragment">
+        tools:context=".ui.ModelSetupScreen">
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -15,83 +15,71 @@
                 android:id="@+id/title_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Download AI Models"
+                android:text="Setup AI Models"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                android:layout_marginBottom="32dp"
+                android:layout_marginBottom="48dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-                android:id="@+id/dropdown_label"
-                android:layout_width="wrap_content"
+        <Button
+                android:id="@+id/phi3_button"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Select Model:"
+                android:text="Download Phi-3 Model"
                 android:textSize="16sp"
-                android:layout_marginBottom="8dp"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="12dp"
+                android:layout_marginBottom="16dp"
+                style="@style/Widget.Material3.Button"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/title_text"
-                app:layout_constraintBottom_toTopOf="@id/model_spinner" />
-
-        <Spinner
-                android:id="@+id/model_spinner"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp"
-                android:minHeight="48dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/dropdown_label"
-                app:layout_constraintBottom_toTopOf="@id/download_button" />
+                app:layout_constraintBottom_toTopOf="@id/local_file_button" />
 
         <Button
-                android:id="@+id/download_button"
+                android:id="@+id/local_file_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Select Local GGUF File"
+                android:textSize="16sp"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="12dp"
+                android:layout_marginBottom="16dp"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/phi3_button"
+                app:layout_constraintBottom_toTopOf="@id/back_button" />
+
+        <Button
+                android:id="@+id/back_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Download Model"
+                android:text="Go to Chat"
                 android:textSize="16sp"
                 android:paddingHorizontal="32dp"
                 android:paddingVertical="12dp"
+                style="@style/Widget.Material3.Button.TextButton"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/model_spinner"
-                app:layout_constraintBottom_toTopOf="@id/download_progress" />
-
-        <ProgressBar
-                android:id="@+id/download_progress"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:layout_marginTop="16dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/download_button" />
+                app:layout_constraintTop_toBottomOf="@id/local_file_button"
+                app:layout_constraintBottom_toBottomOf="parent" />
 
         <TextView
                 android:id="@+id/status_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Select a model and click download to begin"
+                android:layout_marginTop="24dp"
+                android:text="Select an option to get started"
                 android:textSize="14sp"
                 android:gravity="center"
                 android:textColor="@android:color/darker_gray"
+                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/download_progress" />
-
-        <Button
-                android:id="@+id/button_second"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/previous"
-                android:layout_marginTop="32dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/status_text"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/back_button" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

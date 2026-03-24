@@ -4,7 +4,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".FirstFragment">
+        tools:context=".ui.FirstFragment">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipe_refresh"
@@ -46,7 +46,8 @@
                 android:inputType="textMultiLine"
                 android:background="@android:drawable/edit_text"
                 android:padding="12dp"
-                android:layout_marginEnd="8dp" />
+                android:layout_marginEnd="8dp"
+                android:textColor="@android:color/black" />
 
         <ImageButton
                 android:id="@+id/send_button"
