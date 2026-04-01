@@ -1,5 +1,8 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.compose)
 }
 
 android {
@@ -7,6 +10,23 @@ android {
     compileSdk {
         version = release(36) {
             minorApiLevel = 1
+        }
+    }
+
+    dynamicFeatures.add(":litert_npu_runtime_libraries:qualcomm_runtime_v79")
+
+    tasks.withType<JavaCompile>().configureEach {
+        options.compilerArgs.addAll(listOf("-Xlint:none"))
+    }
+
+    tasks.withType<KotlinCompile>().configureEach {
+        compilerOptions {
+            freeCompilerArgs.addAll(
+                listOf(
+                    "-Xskip-primitive-version-checks",
+                    "-Xskip-metadata-version-check"
+                )
+            )
         }
     }
 
@@ -18,6 +38,10 @@ android {
         versionName = "1.0-rc1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            abiFilters += listOf("armeabi-v7a", "arm64-v8a")
+        }
     }
 
     // Signing configurations
@@ -55,12 +79,12 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_24
-        targetCompatibility = JavaVersion.VERSION_24
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
 
     kotlin {
-        jvmToolchain(24)
+        jvmToolchain(21)
     }
 
     packaging {
@@ -70,19 +94,59 @@ android {
         }
     }
     buildFeatures {
-        viewBinding = true
+        compose = true
+        // Required if using certain native NPU libraries
+        prefab = true
     }
+    dependenciesInfo {
+        includeInApk = false
+        includeInBundle = true
+    }
+    buildToolsVersion = "36.1.0"
 }
 
 dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-    implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.documentfile)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
-    implementation(libs.androidx.recyclerview)
-    implementation(libs.androidx.swiperefreshlayout)
+    implementation(libs.khushpanchal.ketch)
+    implementation(libs.material)
+
+    // Compose BOM and dependencies
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.compose.ui)
+    implementation(libs.androidx.compose.ui.graphics)
+    implementation(libs.androidx.compose.ui.tooling.preview)
+    debugImplementation(libs.androidx.compose.ui.tooling)
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.navigation.compose)
+
+    // LiteRT Core Libraries
+    // Using google-litert instead to avoid duplicates
+
+    // LiteRT Accelerator Libraries
+    implementation(libs.ai.litert.gpu)
+
+    // LiteRTLM (Language Model) Libraries
+    implementation(libs.litertlm.android)
+
+    // Google AI Edge LiteRT Libraries
+    implementation(libs.google.litert)
+
+    // Strings for NPU runtime libraries
+    implementation(project(":litert_npu_runtime_libraries:runtime_strings"))
+
+    // Gson for JSON parsing
+    implementation(libs.gson)
+
+    // Room Database
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
+    annotationProcessor(libs.room.compiler)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

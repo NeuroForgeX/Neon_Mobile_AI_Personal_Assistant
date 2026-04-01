@@ -9,16 +9,16 @@ import java.io.File
 import java.io.FileOutputStream
 
 object FileTransferHelper {
-    
+
     private const val TAG = "FileTransferHelper"
-    
+
     /**
      * Get the internal cache directory
      */
-    private fun getInternalCacheDir(context: Context): File {
+    fun getInternalCacheDir(context: Context): File {
         return context.cacheDir
     }
-    
+
     /**
      * Copy a single file from URI to internal directory
      */
@@ -26,23 +26,23 @@ object FileTransferHelper {
         return try {
             val internalDir = getInternalCacheDir(context)
             val targetFile = File(internalDir, targetFileName)
-            
+
             // Copy file content
             context.contentResolver.openInputStream(uri)?.use { input ->
                 FileOutputStream(targetFile).use { output ->
                     input.copyTo(output)
                 }
             }
-            
+
             Log.d(TAG, "File copied to: ${targetFile.absolutePath}")
             targetFile.absolutePath
-            
+
         } catch (e: Exception) {
             Log.e(TAG, "Failed to copy file: ${e.message}", e)
             null
         }
     }
-    
+
     /**
      * Copy entire directory structure from URI to internal cache directory
      * Returns list of all copied file paths
@@ -54,35 +54,40 @@ object FileTransferHelper {
                 Log.e(TAG, "Invalid tree URI")
                 return null
             }
-            
+
             val internalCacheDir = getInternalCacheDir(context)
-            
+
             // Get the directory name from the URI
             val dirName = documentFile.name ?: "directory"
             val targetDir = File(internalCacheDir, dirName)
             targetDir.mkdirs()
-            
+
             // Copy all files and collect paths
             val copiedFiles = mutableListOf<String>()
             copyDirectoryAndCollectPaths(context, documentFile, targetDir, copiedFiles)
-            
+
             Log.d(TAG, "Directory copied to: ${targetDir.absolutePath}")
             Log.d(TAG, "Total files copied: ${copiedFiles.size}")
             copiedFiles
-            
+
         } catch (e: Exception) {
             Log.e(TAG, "Failed to copy directory: ${e.message}", e)
             null
         }
     }
-    
+
     /**
      * Recursively copy directory contents and collect all file paths
      */
-    private fun copyDirectoryAndCollectPaths(context: Context, sourceDir: DocumentFile, targetDir: File, filePaths: MutableList<String>) {
+    private fun copyDirectoryAndCollectPaths(
+        context: Context,
+        sourceDir: DocumentFile,
+        targetDir: File,
+        filePaths: MutableList<String>
+    ) {
         sourceDir.listFiles()?.forEach { documentFile ->
             val targetFile = File(targetDir, documentFile.name ?: "unknown")
-            
+
             if (documentFile.isDirectory) {
                 targetFile.mkdirs()
                 copyDirectoryAndCollectPaths(context, documentFile, targetFile, filePaths)
@@ -99,7 +104,7 @@ object FileTransferHelper {
             }
         }
     }
-    
+
     /**
      * Get all files with specific extension from copied directory
      */
@@ -108,12 +113,12 @@ object FileTransferHelper {
         if (!dir.exists()) {
             return emptyList()
         }
-        
+
         val foundFiles = mutableListOf<String>()
         findFilesRecursive(dir, extension, foundFiles)
         return foundFiles
     }
-    
+
     /**
      * Recursively search for files with specific extension
      */
@@ -126,21 +131,21 @@ object FileTransferHelper {
             }
         }
     }
-    
+
     /**
      * Check if file exists in internal directory
      */
     fun fileExists(filePath: String): Boolean {
         return File(filePath).exists()
     }
-    
+
     /**
      * Get directory path for a given directory name in cache
      */
     fun getCacheDirPath(context: Context, dirName: String): String {
         return File(getInternalCacheDir(context), dirName).absolutePath
     }
-    
+
     /**
      * Create intent for selecting directory
      */
@@ -151,7 +156,7 @@ object FileTransferHelper {
             addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION)
         }
     }
-    
+
     /**
      * Create intent for selecting single file
      */
@@ -163,7 +168,7 @@ object FileTransferHelper {
             addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION)
         }
     }
-    
+
     /**
      * Take persistent permission for a URI
      */
@@ -178,7 +183,7 @@ object FileTransferHelper {
             Log.w(TAG, "Could not take persistent permission: ${e.message}")
         }
     }
-    
+
     /**
      * Clean up internal cache directory
      */

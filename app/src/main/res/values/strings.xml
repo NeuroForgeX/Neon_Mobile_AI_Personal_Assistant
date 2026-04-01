@@ -43,4 +43,9 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+    <string name="setup_ai_models">Setup AI Models</string>
+    <string name="download_phi_3_model">Download Phi-3 Model</string>
+    <string name="select_local_gguf_file">Select Local GGUF File</string>
+    <string name="go_to_chat">Go to Chat</string>
+    <string name="select_an_option_to_get_started">Select an option to get started</string>
 </resources>

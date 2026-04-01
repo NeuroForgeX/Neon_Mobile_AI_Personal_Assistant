@@ -19,9 +19,12 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven { url = uri("https://www.jitpack.io") }
     }
 }
 
 rootProject.name = "MyHappyBot"
 include(":app")
+include(":litert_npu_runtime_libraries:runtime_strings")
+include(":litert_npu_runtime_libraries:qualcomm_runtime_v79")
  
