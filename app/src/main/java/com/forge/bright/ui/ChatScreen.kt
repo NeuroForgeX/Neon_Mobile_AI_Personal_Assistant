@@ -17,8 +17,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.forge.bright.R
-import com.forge.bright.ai.Assistant
-import com.forge.bright.ai.ChatAssistant
 import com.forge.bright.databinding.FragmentFirstBinding
 import com.forge.bright.utils.PreferencesManager
 import com.forge.bright.utils.getAbsolutePath
@@ -73,7 +71,6 @@ class ChatScreen : Fragment() {
     private val binding get() = _binding!!
     private lateinit var chatAdapter: ChatAdapter
     private val messages = mutableListOf<ChatMessage>()
-    private val chatAssistant = ChatAssistant()
     private val scope = CoroutineScope(Dispatchers.Main + SupervisorJob())
     private var loadingDialog: AlertDialog? = null
 
@@ -126,14 +123,9 @@ class ChatScreen : Fragment() {
                         addMessage("Loading model @ $path", isUser = false)
                     }
                     
-                    // Run model loading on IO thread
-                    withContext(Dispatchers.IO) {
-                        path.let { chatAssistant.loadChatModel(requireContext(), it) }
-                    }
-                    
+                    // TODO: Implement AI model loading without LangChain4j
                     withContext(Dispatchers.Main) {
-                        hideLoadingDialog()
-                        addMessage("AI Assistant ready! How can I help you today?", isUser = false)
+                        addMessage("AI functionality temporarily unavailable - LangChain4j removed", isUser = false)
                         isLoadingModel = false
                     }
 
@@ -209,30 +201,9 @@ class ChatScreen : Fragment() {
     private fun getAiResponse(userMessage: String) {
         scope.launch {
             try {
-                if (!chatAssistant.isLoaded()) {
-                    // Show typing indicator on main thread
-                    withContext(Dispatchers.Main) {
-                        addMessage("AI is typing...", isUser = false)
-                    }
-
-                    // Get response from AI on IO thread
-                    val response = withContext(Dispatchers.IO) {
-                        chatAssistant.chat(userMessage)
-                    }
-
-                    // Update UI on main thread
-                    withContext(Dispatchers.Main) {
-                        // Remove typing indicator and add actual response
-                        if (messages.isNotEmpty()) {
-                            messages.removeAt(messages.size - 1)
-                            chatAdapter.updateMessages(messages.toList())
-                        }
-                        addMessage(response, isUser = false)
-                    }
-                } else {
-                    withContext(Dispatchers.Main) {
-                        addMessage("AI Assistant not available", isUser = false)
-                    }
+                // TODO: Implement AI response without LangChain4j
+                withContext(Dispatchers.Main) {
+                    addMessage("AI functionality temporarily unavailable - LangChain4j removed", isUser = false)
                 }
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {

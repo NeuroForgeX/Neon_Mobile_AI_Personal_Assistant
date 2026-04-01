@@ -83,18 +83,7 @@ dependencies {
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.androidx.recyclerview)
     implementation(libs.androidx.swiperefreshlayout)
-    implementation(platform(libs.langchain4j.bom))
-    implementation(libs.langchain4j)
-    // implementation(libs.langchain4j.document.parser.apache.pdfbox)
-    implementation(libs.langchain4j.embeddings.all.minilm.l6.v2)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
-    implementation("dev.langchain4j:langchain4j-jlama:latest") {
-        exclude(group = "com.google.code.findbugs", module = "jsr305")
-    }
-    implementation("com.github.tjake:jlama-native:+") {
-        exclude(group = "com.google.code.findbugs", module = "jsr305")
-    }
 }

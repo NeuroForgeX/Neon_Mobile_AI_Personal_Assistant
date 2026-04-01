@@ -20,10 +20,6 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
-# Keep LangChain4j classes
--keep class dev.langchain4j.** { *; }
--keep class org.apache.** { *; }
--keep class ai.djl.** { *; }
 
 # Keep application classes
 -keep class com.forge.bright.** { *; }

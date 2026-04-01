@@ -1,11 +1,6 @@
 # Release Candidate specific ProGuard rules
 # More aggressive optimization for release candidates
 
-# Keep LangChain4j classes and methods
--keep class dev.langchain4j.** { *; }
--keep class org.apache.** { *; }
--keep class ai.djl.** { *; }
--keep class org.slf4j.** { *; }
 
 # Keep AI model related classes
 -keep class com.forge.bright.ai.** { *; }
