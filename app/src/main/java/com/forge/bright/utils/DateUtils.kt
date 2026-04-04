@@ -5,6 +5,8 @@ import java.time.LocalDate
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 
+private const val TAG = "DateUtils.kt"
+
 data class MessageTemporalTag(val tag: String, val time: String)
 object DateUtils {
     fun getMessageTime(datetimeInMillis: Long): MessageTemporalTag {

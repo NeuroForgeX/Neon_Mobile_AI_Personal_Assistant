@@ -1,5 +1,6 @@
 package com.forge.bright.db
 
+import android.content.Context
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -9,7 +10,8 @@ import com.forge.bright.db.o.ChatMessage
 import com.forge.bright.db.o.Model
 import com.forge.bright.db.o.Topic
 import kotlinx.coroutines.flow.Flow
-import android.content.Context
+
+private const val TAG = "DataAccess.kt"
 
 @Dao interface TopicDao {
     @Query("SELECT * FROM topics ORDER BY createdAt DESC")
@@ -103,36 +105,48 @@ import android.content.Context
 
 object DataAccess {
     private lateinit var database: ConversationDatabase
-    
+
     fun initialize(context: Context) {
-        database = ConversationDatabase.getDatabase(context)
+        if (!::database.isInitialized) {
+            database = ConversationDatabase.getDatabase(context)
+        }
     }
-    
+
+    fun initializeDebug() {
+        database = DebugDatabase()
+    }
+
     fun getAllModels(): Flow<List<Model>> {
         return database.modelDao().getAllModels()
     }
-    
+
     fun getAllTopics(): Flow<List<Topic>> {
         return database.topicDao().getAllTopics()
     }
-    
+
     fun getMessagesForTopic(topicId: Int): Flow<List<ChatMessage>> {
         return database.chatMessageDao().getMessagesForTopic(topicId)
     }
-    
+
     suspend fun getModelById(modelId: Int): Model? {
         return database.modelDao().getModelById(modelId)
     }
-    
+
     suspend fun insertModel(model: Model): Long {
         return database.modelDao().insertModel(model)
     }
-    
+
     suspend fun updateModel(model: Model) {
         return database.modelDao().updateModel(model)
     }
-    
+
     suspend fun deleteModel(model: Model) {
         return database.modelDao().deleteModel(model)
+    }
+}
+
+object debug {
+    fun initialize(context: Context) {
+        DataAccess.initialize(context)
     }
 }

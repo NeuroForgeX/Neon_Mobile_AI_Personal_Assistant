@@ -1,7 +1,6 @@
 package com.forge.bright.db
 
 import android.content.Context
-import android.net.Uri
 import android.util.Log
 import com.forge.bright.R
 import com.forge.bright.db.o.Model
@@ -11,13 +10,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
 
-/**
- * Default data initialization for the application database
- */
+private const val TAG = "DefaultData.kt"
+
 object DefaultData {
-
-    private val TAG = javaClass.name
-
     /**
      * Check if models table exists and has data, populate from JSON if empty
      */
@@ -43,7 +38,7 @@ object DefaultData {
             val jsonString = context.resources.openRawResource(R.raw.models).bufferedReader().use { it.readText() }
 
             val jsonObject = JSONObject(jsonString)
-            val models = mutableListOf<com.forge.bright.db.o.Model>()
+            val models = mutableListOf<Model>()
 
             // Parse liteRTLM models
             val liteRTLM = jsonObject.optJSONObject("liteRTLM")
@@ -56,7 +51,6 @@ object DefaultData {
                                      size = modelJson.optString("size", ""),
                                      downloadUrl = modelJson.optString("downloadUrl", ""),
                                      owner = modelJson.optString("owner", ""),
-                                     localUri = Uri.EMPTY,
                                      type = LiteRTLM))
                 }
             }
@@ -72,7 +66,6 @@ object DefaultData {
                                      size = modelJson.optString("size", ""),
                                      downloadUrl = modelJson.optString("downloadUrl", ""),
                                      owner = modelJson.optString("owner", ""),
-                                     localUri = Uri.EMPTY,
                                      type = GGUF))
                 }
             }

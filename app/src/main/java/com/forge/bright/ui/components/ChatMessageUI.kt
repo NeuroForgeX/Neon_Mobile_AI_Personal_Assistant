@@ -19,14 +19,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.forge.bright.SEEN
+import com.forge.bright.SENDING_MESSAGE
+import com.forge.bright.TYPING_INDICATOR
 import com.forge.bright.db.o.ChatMessage
 import com.forge.bright.db.o.MessageType
 import com.forge.bright.utils.DateUtils
+
+private const val TAG = "ChatMessageUI.kt"
 
 @Composable
 fun ChatMessageItem(message: ChatMessage) {
@@ -113,7 +118,7 @@ fun DynamicSendNotificationMessageUI(message: ChatMessage) {
                 .padding(12.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
                 CircularProgressIndicator(modifier = Modifier.size(16.dp), strokeWidth = 2.dp, color = MaterialTheme.colorScheme.onPrimary)
-                Text(text = "Sending...", color = MaterialTheme.colorScheme.onPrimary, fontSize = 14.sp)
+                Text(text = SENDING_MESSAGE, color = MaterialTheme.colorScheme.onPrimary, fontSize = 14.sp)
             }
         }
         Text(text = DateUtils.readableTime(message.timestamp), fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(top = 4.dp, end = 4.dp))
@@ -125,7 +130,7 @@ fun DynamicSeenNotificationMessageUI(message: ChatMessage) {
     Row(modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 8.dp, vertical = 2.dp), horizontalArrangement = Arrangement.Start, verticalAlignment = Alignment.CenterVertically) {
-        Text(text = "Seen", fontSize = 10.sp, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(end = 4.dp))
+        Text(text = SEEN, fontSize = 10.sp, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(end = 4.dp))
         // Small checkmark icon could be added here
         Text(text = "✓", fontSize = 10.sp, color = MaterialTheme.colorScheme.primary)
     }
@@ -142,7 +147,7 @@ fun DynamicTypingNotificationMessageUI(message: ChatMessage) {
             horizontalArrangement = Arrangement.spacedBy(2.dp)
         ) {
             Text(
-                text = "typing...",
+                text = TYPING_INDICATOR,
                 fontSize = 14.sp, 
                 color = MaterialTheme.colorScheme.onSecondaryContainer,
                 fontStyle = FontStyle.Italic

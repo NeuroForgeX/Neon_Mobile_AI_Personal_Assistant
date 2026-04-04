@@ -1,35 +1,17 @@
-plugins {
-    id("com.android.dynamic-feature")
-}
+plugins { id("com.android.dynamic-feature") }
 
 android {
-    namespace = "com.forge.bright.litert_npu_runtime_libraries.qualcomm_runtime_v79"
-    compileSdk = 36
+  namespace = "com.google.ai.edge.litert.qualcomm_runtime.v79"
+  compileSdk = 35
 
-    defaultConfig {
-        minSdk = 30
-    }
-    
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-        }
-        
-        create("releaseCandidate") {
-            initWith(getByName("release"))
-        }
-    }
-    
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_24
-        targetCompatibility = JavaVersion.VERSION_24
-    }
+  defaultConfig { minSdk = 31 }
 
-    kotlin {
-        jvmToolchain(24)
+  sourceSets {
+    getByName("main") {
+      // let gradle pack the shared library into apk
+      jniLibs.srcDirs("src/main/jni")
     }
+  }
 }
 
-dependencies {
-    implementation(project(":app"))
-}
+dependencies { implementation(project(":app")) }

@@ -1,44 +1,140 @@
 package com.forge.bright.ui.navigation
 
+import android.util.Log
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Chat
+import androidx.compose.material.icons.filled.Download
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalInspectionMode
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.forge.bright.NAV_CHAT
+import com.forge.bright.NAV_HOME
+import com.forge.bright.NAV_MODELS
+import com.forge.bright.NAV_SETTINGS
+import com.forge.bright.ROUTE_CHAT
+import com.forge.bright.ROUTE_MAIN
+import com.forge.bright.ROUTE_MODEL_SETUP
+import com.forge.bright.ROUTE_SETTINGS
+import com.forge.bright.db.DataAccess
 import com.forge.bright.ui.screens.ChatScreen
+import com.forge.bright.ui.screens.MainScreen
 import com.forge.bright.ui.screens.ModelSetupScreen
-import com.forge.bright.utils.PreferencesManager
-import android.util.Log
+import com.forge.bright.ui.screens.SettingsScreen
+import com.forge.bright.ui.theme.MyHappyBotTheme
+import com.forge.bright.utils.PreferencesManager.hasModelConfigured
+
+private const val TAG = "AppNavigation.kt"
+
+data class BottomNavItem(
+    val title: String, val icon: ImageVector, val route: String
+                        )
 
 @Composable
 fun AppNavigation(
-    navController: NavHostController = rememberNavController(),
-    onModelConfigCheck: (Boolean) -> Unit) {
-    val context = LocalContext.current
-    
+    navController: NavHostController = rememberNavController(), onModelConfigCheck: (Boolean) -> Unit, skipSplash: Boolean = false, startWithChat: Boolean = false
+                 ) {
+    LocalContext.current
+
     LaunchedEffect(Unit) {
-        val hasModelConfigured = PreferencesManager.hasModelConfigured()
-        onModelConfigCheck(hasModelConfigured)
-        
-        if (!hasModelConfigured) {
-            Log.d("AppNavigation", "No model configured, navigating to setup")
-            navController.navigate("model_setup") {
-                popUpTo("chat") { inclusive = true }
+        if (!skipSplash) {
+            val hasModelConfigured = hasModelConfigured()
+            onModelConfigCheck(hasModelConfigured)
+
+            if (!hasModelConfigured) {
+                Log.d(TAG, "No model configured, navigating to setup")
+                navController.navigate(ROUTE_MODEL_SETUP) {
+                    popUpTo(ROUTE_MAIN) { inclusive = false }
+                }
             }
         }
     }
-    
-    NavHost(
-        navController = navController,
-        startDestination = if (PreferencesManager.hasModelConfigured()) "chat" else "model_setup"
-    ) {
-        composable("chat") {
-            ChatScreen(navController = navController)
+
+    // Determine start destination based on splash screen logic
+    val startDestination = when {
+        skipSplash && startWithChat -> ROUTE_CHAT
+        skipSplash && !startWithChat -> ROUTE_MODEL_SETUP
+        else -> ROUTE_MAIN
+    }
+
+    val bottomNavItems = listOf(BottomNavItem(NAV_HOME, Icons.Filled.Home, ROUTE_MAIN),
+                                BottomNavItem(NAV_CHAT, Icons.Filled.Chat, ROUTE_CHAT),
+                                BottomNavItem(NAV_MODELS, Icons.Filled.Download, ROUTE_MODEL_SETUP),
+                                BottomNavItem(NAV_SETTINGS, Icons.Filled.Settings, ROUTE_SETTINGS))
+
+    Scaffold(bottomBar = {
+        NavigationBar {
+            val navBackStackEntry by navController.currentBackStackEntryAsState()
+            val currentRoute = navBackStackEntry?.destination?.route
+
+            bottomNavItems.forEach { item ->
+                NavigationBarItem(icon = { Icon(item.icon, contentDescription = item.title) }, label = { Text(item.title) }, selected = currentRoute == item.route, onClick = {
+                    navController.navigate(item.route) {
+                        popUpTo(navController.graph.findStartDestination().id) {
+                            saveState = true
+                        }
+                        launchSingleTop = true
+                        restoreState = true
+                    }
+                })
+            }
         }
-        composable("model_setup") {
-            ModelSetupScreen(navController = navController)
+    }) { paddingValues ->
+        NavHost(navController = navController, startDestination = startDestination, modifier = Modifier.padding(paddingValues)) {
+            composable(ROUTE_MAIN) {
+                MainScreen()
+            }
+            composable(ROUTE_CHAT) {
+                ChatScreen(navController = navController)
+            }
+            composable(ROUTE_MODEL_SETUP) {
+                ModelSetupScreen(navController = navController)
+            }
+            composable(ROUTE_SETTINGS) {
+                SettingsScreen()
+            }
         }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun AppNavigationPreview() {
+    // Initialize routes for preview
+    ROUTE_MAIN = "main"
+    ROUTE_CHAT = "chat"
+    ROUTE_MODEL_SETUP = "model_setup"
+    ROUTE_SETTINGS = "settings"
+
+    // Initialize navigation titles for preview
+    NAV_HOME = "Home"
+    NAV_CHAT = "Chat"
+    NAV_MODELS = "Models"
+    NAV_SETTINGS = "Settings"
+
+    val isPreview = LocalInspectionMode.current
+    MyHappyBotTheme {
+        if (isPreview) {
+            DataAccess.initializeDebug()
+        }
+        AppNavigation(navController = rememberNavController(), onModelConfigCheck = { _ -> }, skipSplash = true, startWithChat = false)
     }
 }

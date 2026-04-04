@@ -6,6 +6,9 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalInspectionMode
+
+private const val TAG = "Theme.kt"
 
 private val DarkColorScheme = darkColorScheme(
     primary = Color(0xFFBB86FC),
@@ -38,8 +41,10 @@ fun MyHappyBotTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
+    val isPreview = LocalInspectionMode.current
     val colorScheme = when {
-        darkTheme -> DarkColorScheme
+        isPreview -> LightColorScheme
+        darkTheme -> LightColorScheme
         else -> LightColorScheme
     }
 

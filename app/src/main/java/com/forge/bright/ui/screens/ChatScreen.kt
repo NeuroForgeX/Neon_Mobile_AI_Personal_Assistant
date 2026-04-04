@@ -33,6 +33,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.forge.bright.ERROR_AI_RESPONSE
+import com.forge.bright.SEEN
+import com.forge.bright.SEND_MESSAGE_DESC
+import com.forge.bright.TYPE_MESSAGE_HINT
+import com.forge.bright.TYPING_INDICATOR
 import com.forge.bright.ai.ChatAssistant
 import com.forge.bright.db.o.ChatMessage
 import com.forge.bright.db.o.MessageType
@@ -42,17 +47,19 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+private const val TAG = "ChatScreen.kt"
+
 fun insertChatMessage(message: ChatMessage, messages: MutableList<ChatMessage>): MutableList<ChatMessage> {
     val updatedMessages = messages.toMutableList()
     updatedMessages.add(message)
     updatedMessages.sortBy { it.timestamp }
-    return updatedMessages;
+    return updatedMessages
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ChatScreen(navController: NavHostController) {
-    val context = LocalContext.current
+    LocalContext.current
     val scope = rememberCoroutineScope()
 
     var messages by remember { mutableStateOf(mutableListOf<ChatMessage>()) }
@@ -82,7 +89,7 @@ fun ChatScreen(navController: NavHostController) {
                 OutlinedTextField(value = messageText,
                                   onValueChange = { messageText = it },
                                   modifier = Modifier.weight(1f),
-                                  placeholder = { Text("Type a message...") },
+                                  placeholder = { Text(TYPE_MESSAGE_HINT) },
                                   maxLines = 3,
                                   shape = RoundedCornerShape(24.dp))
 
@@ -100,14 +107,15 @@ fun ChatScreen(navController: NavHostController) {
                                 }
                             } catch (e: Exception) {
                                 withContext(Dispatchers.Main) {
-                                    val errorMessage = ChatMessage(topicId = 0, message = "Error getting AI response: ${e.message}", messageType = MessageType.STATIC_ERROR_NOTIFICATION)
+                                    val errorMessageText = ERROR_AI_RESPONSE.format(e.message)
+                                    val errorMessage = ChatMessage(topicId = 0, message = errorMessageText, messageType = MessageType.STATIC_ERROR_NOTIFICATION)
                                     messages = insertChatMessage(errorMessage, messages)
                                 }
                             }
                         }
                     }
                 }) {
-                    Icon(imageVector = Icons.Default.Send, contentDescription = "Send message", tint = MaterialTheme.colorScheme.primary)
+                    Icon(imageVector = Icons.Default.Send, contentDescription = SEND_MESSAGE_DESC, tint = MaterialTheme.colorScheme.primary)
                 }
             }
         }
@@ -117,20 +125,22 @@ fun ChatScreen(navController: NavHostController) {
 @Preview(showBackground = true)
 @Composable
 fun ChatScreenPreview() {
-    MyHappyBotTheme() {
+    MyHappyBotTheme {
         ChatScreenContentPreview()
     }
 }
 
 @Composable
 private fun ChatScreenContentPreview() {
+    val typingIndicator = TYPING_INDICATOR
+    val seen = SEEN
     var messages by remember {
         mutableStateOf(listOf(ChatMessage(message = "Hello! How can I help you today?", topicId = 0, messageType = MessageType.FROM_AI),
                               ChatMessage(message = "I need help with my Android app", topicId = 0, messageType = MessageType.FROM_USER),
                               ChatMessage(message = "I'd be happy to help! What specific issue are you facing?", topicId = 0, messageType = MessageType.FROM_AI),
                               ChatMessage(message = "Technical Error occurred", topicId = 0, messageType = MessageType.STATIC_ERROR_NOTIFICATION),
-                              ChatMessage(message = "Typing...", topicId = 0, messageType = MessageType.DYNAMIC_TYPING_NOTIFICATION),
-                              ChatMessage(message = "Seen", topicId = 0, messageType = MessageType.DYNAMIC_SEEN_NOTIFICATION),
+                              ChatMessage(message = typingIndicator, topicId = 0, messageType = MessageType.DYNAMIC_TYPING_NOTIFICATION),
+                              ChatMessage(message = seen, topicId = 0, messageType = MessageType.DYNAMIC_SEEN_NOTIFICATION),
                               ChatMessage(message = "Sent", topicId = 0, messageType = MessageType.DYNAMIC_SEND_NOTIFICATION)))
     }
     var messageText by remember { mutableStateOf("") }
@@ -150,12 +160,12 @@ private fun ChatScreenContentPreview() {
                 OutlinedTextField(value = messageText,
                                   onValueChange = { messageText = it },
                                   modifier = Modifier.weight(1f),
-                                  placeholder = { Text("Type a message...") },
+                                  placeholder = { Text(TYPE_MESSAGE_HINT) },
                                   maxLines = 3,
                                   shape = RoundedCornerShape(24.dp))
 
                 IconButton(onClick = {}) {
-                    Icon(imageVector = Icons.Default.Send, contentDescription = "Send message", tint = MaterialTheme.colorScheme.primary)
+                    Icon(imageVector = Icons.Default.Send, contentDescription = SEND_MESSAGE_DESC, tint = MaterialTheme.colorScheme.primary)
                 }
             }
         }

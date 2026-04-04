@@ -26,5 +26,10 @@ dependencyResolutionManagement {
 rootProject.name = "MyHappyBot"
 include(":app")
 include(":litert_npu_runtime_libraries:runtime_strings")
+include(":litert_npu_runtime_libraries:mediatek_runtime")
+include(":litert_npu_runtime_libraries:qualcomm_runtime_v69")
+include(":litert_npu_runtime_libraries:qualcomm_runtime_v73")
+include(":litert_npu_runtime_libraries:qualcomm_runtime_v75")
 include(":litert_npu_runtime_libraries:qualcomm_runtime_v79")
+include(":litert_npu_runtime_libraries:qualcomm_runtime_v81")
  

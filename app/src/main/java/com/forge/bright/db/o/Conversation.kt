@@ -5,6 +5,8 @@ import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
 
+private const val TAG = "Conversation.kt"
+
 // @formatter:off
 enum class MessageType {
     FROM_USER,

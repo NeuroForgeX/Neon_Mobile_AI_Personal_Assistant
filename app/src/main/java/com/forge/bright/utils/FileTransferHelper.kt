@@ -7,11 +7,11 @@ import android.util.Log
 import androidx.documentfile.provider.DocumentFile
 import java.io.File
 import java.io.FileOutputStream
+import java.nio.file.Paths
+
+private const val TAG = "FileTransferHelper.kt"
 
 object FileTransferHelper {
-
-    private const val TAG = "FileTransferHelper"
-
     /**
      * Get the internal cache directory
      */
@@ -19,14 +19,21 @@ object FileTransferHelper {
         return context.cacheDir
     }
 
+    fun createInternalDirectory(context: Context, vararg entries: String): File {
+        return Paths.get(context.cacheDir.absolutePath, *entries).toFile().apply { mkdirs() }
+    }
+
+    fun copyFileToInternal(context: Context, uri: Uri, targetFileName: String): String? {
+        val internalDir = getInternalCacheDir(context)
+        val targetFile = File(internalDir, targetFileName)
+        return copyFileToInternal(context, uri, targetFile)
+    }
+
     /**
      * Copy a single file from URI to internal directory
      */
-    fun copyFileToInternal(context: Context, uri: Uri, targetFileName: String): String? {
+    fun copyFileToInternal(context: Context, uri: Uri, targetFile: File): String? {
         return try {
-            val internalDir = getInternalCacheDir(context)
-            val targetFile = File(internalDir, targetFileName)
-
             // Copy file content
             context.contentResolver.openInputStream(uri)?.use { input ->
                 FileOutputStream(targetFile).use { output ->
@@ -80,11 +87,8 @@ object FileTransferHelper {
      * Recursively copy directory contents and collect all file paths
      */
     private fun copyDirectoryAndCollectPaths(
-        context: Context,
-        sourceDir: DocumentFile,
-        targetDir: File,
-        filePaths: MutableList<String>
-    ) {
+        context: Context, sourceDir: DocumentFile, targetDir: File, filePaths: MutableList<String>
+                                            ) {
         sourceDir.listFiles()?.forEach { documentFile ->
             val targetFile = File(targetDir, documentFile.name ?: "unknown")
 
@@ -174,10 +178,7 @@ object FileTransferHelper {
      */
     fun takePersistentPermission(context: Context, uri: Uri) {
         try {
-            context.contentResolver.takePersistableUriPermission(
-                uri,
-                Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
-            )
+            context.contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
             Log.d(TAG, "Persistent permission granted for: $uri")
         } catch (e: Exception) {
             Log.w(TAG, "Could not take persistent permission: ${e.message}")

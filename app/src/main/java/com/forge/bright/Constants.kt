@@ -1,12 +1,13 @@
 package com.forge.bright
 
 import android.Manifest
-import android.os.Environment
-import android.content.Context
 import android.net.Uri
+import android.os.Environment
 import java.io.File
 import java.nio.file.Path
 import java.nio.file.Paths
+
+private const val TAG = "Constants.kt"
 
 const val MODEL_EXTENSION = ".litertlm"
 fun hasPreferredModelExtension(path: Any): Boolean {

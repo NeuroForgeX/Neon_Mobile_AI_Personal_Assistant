@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -13,8 +14,12 @@ android {
         }
     }
 
+    dynamicFeatures.add(":litert_npu_runtime_libraries:mediatek_runtime")
+    dynamicFeatures.add(":litert_npu_runtime_libraries:qualcomm_runtime_v69")
+    dynamicFeatures.add(":litert_npu_runtime_libraries:qualcomm_runtime_v73")
+    dynamicFeatures.add(":litert_npu_runtime_libraries:qualcomm_runtime_v75")
     dynamicFeatures.add(":litert_npu_runtime_libraries:qualcomm_runtime_v79")
-
+    dynamicFeatures.add(":litert_npu_runtime_libraries:qualcomm_runtime_v81")
     tasks.withType<JavaCompile>().configureEach {
         options.compilerArgs.addAll(listOf("-Xlint:none"))
     }
@@ -32,7 +37,7 @@ android {
 
     defaultConfig {
         applicationId = "com.forge.bright"
-        minSdk = 30
+        minSdk = 31
         targetSdk = 36
         versionCode = 2
         versionName = "1.0-rc1"
@@ -40,7 +45,8 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         ndk {
-            abiFilters += listOf("armeabi-v7a", "arm64-v8a")
+            // NPU only supports 64-bit ARM
+            abiFilters += listOf("arm64-v8a")
         }
     }
 
@@ -92,6 +98,10 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
             excludes += "/META-INF/DEPENDENCIES"
         }
+        // Mandatory for Qualcomm NPU runtime libraries
+        jniLibs {
+            useLegacyPackaging = true
+        }
     }
     buildFeatures {
         compose = true
@@ -119,13 +129,14 @@ dependencies {
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
-    debugImplementation(libs.androidx.compose.ui.tooling)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.material.icons.extended)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.navigation.compose)
-
-    // LiteRT Core Libraries
-    // Using google-litert instead to avoid duplicates
+    
+    // Splash Screen API
+    implementation(libs.androidx.core.splashscreen)
 
     // LiteRT Accelerator Libraries
     implementation(libs.ai.litert.gpu)
@@ -138,6 +149,9 @@ dependencies {
 
     // Strings for NPU runtime libraries
     implementation(project(":litert_npu_runtime_libraries:runtime_strings"))
+    
+    // Include the strings used by the NPU runtime modules
+    implementation(libs.litert.npu.runtime.strings)
 
     // Gson for JSON parsing
     implementation(libs.gson)
@@ -145,9 +159,16 @@ dependencies {
     // Room Database
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
-    annotationProcessor(libs.room.compiler)
+    ksp(libs.room.compiler)
 
     testImplementation(libs.junit)
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.mockito.inline)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
+    debugImplementation(libs.androidx.compose.ui.tooling)
+    debugImplementation(libs.androidx.compose.ui.test.manifest)
+
 }

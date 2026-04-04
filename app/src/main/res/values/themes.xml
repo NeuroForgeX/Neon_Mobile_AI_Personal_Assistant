@@ -6,7 +6,7 @@
     </style>
 
     <style name="Theme.MyHappyBot" parent="Base.Theme.MyHappyBot" />
-    
+
     <!-- Fullscreen theme -->
     <style name="Theme.MyHappyBot.Fullscreen" parent="Theme.MyHappyBot">
         <item name="android:windowFullscreen">true</item>
@@ -18,5 +18,13 @@
         <item name="android:windowTranslucentNavigation">false</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+
+    <!-- Splash Screen Theme -->
+    <style name="Theme.MyHappyBot.SplashScreen" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/design_default_color_primary</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash_screen</item>
+        <item name="windowSplashScreenAnimationDuration">1000</item>
+        <item name="postSplashScreenTheme">@style/Theme.MyHappyBot.Fullscreen</item>
     </style>
 </resources>

@@ -1,20 +1,27 @@
 {
   "liteRTLM": {
+    "Phi-4-mini-instruct_multi-prefill": {
+      "shortName": "Phi 4 mini - DO NOT DOWNLOAD",
+      "description": "Phi 4 mini instruct multi prefill",
+      "size": "3.3 GB",
+      "downloadUrl": "https://huggingface.co/litert-community/Phi-4-mini-instruct/blob/main/Phi-4-mini-instruct_multi-prefill-seq_q8_ekv4096.litertlm",
+      "owner": "Microsoft",
+      "name": "Phi-4-mini-instruct_multi-prefill-seq_q8_ekv4096.litertlm"
+    },
     "Phi-4-mini-instruct_multi-prefill-seq_q8_ekv4096": {
       "shortName": "Phi 4 mini",
       "description": "Phi 4 mini instruct multi prefill",
       "size": "3.3 GB",
-      "downloadUrl": "https://huggingface.co/litert-community/Phi-4-mini-instruct/blob/main/Phi-4-mini-instruct_multi-prefill-seq_q8_ekv4096.litertlm",
       "owner": "Microsoft",
       "name": "Phi-4-mini-instruct_multi-prefill-seq_q8_ekv4096.litertlm"
     }
   },
   "gguf": {
     "Phi-4-mini-instruct_multi-prefill-seq_q8_ekv4096": {
-      "shortName": "Phi-3",
+      "shortName": "Phi-3 - DO NOT DOWNLOAD",
       "description": "Phi-3",
       "size": "2.3GB",
-      "downloadUrl": "",
+      "downloadUrl": "www.google.com",
       "owner": "",
       "name": ""
     }
