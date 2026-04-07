@@ -14,12 +14,6 @@ android {
         }
     }
 
-    dynamicFeatures.add(":litert_npu_runtime_libraries:mediatek_runtime")
-    dynamicFeatures.add(":litert_npu_runtime_libraries:qualcomm_runtime_v69")
-    dynamicFeatures.add(":litert_npu_runtime_libraries:qualcomm_runtime_v73")
-    dynamicFeatures.add(":litert_npu_runtime_libraries:qualcomm_runtime_v75")
-    dynamicFeatures.add(":litert_npu_runtime_libraries:qualcomm_runtime_v79")
-    dynamicFeatures.add(":litert_npu_runtime_libraries:qualcomm_runtime_v81")
     tasks.withType<JavaCompile>().configureEach {
         options.compilerArgs.addAll(listOf("-Xlint:none"))
     }
@@ -148,13 +142,10 @@ dependencies {
     implementation(libs.google.litert)
 
     // 2. LiteRT Play Services Runtime (Standardizes hardware access)
-    implementation("com.google.android.gms:play-services-tflite-java:16.4.0")
+    implementation(libs.play.services.tflite.java)
     
     // 3. Play Services GPU Delegate (Fallback for MediaTek Mali GPU)
-    implementation("com.google.android.gms:play-services-tflite-gpu:16.2.0")
-
-    // Strings for NPU runtime libraries
-    implementation(project(":litert_npu_runtime_libraries:runtime_strings"))
+    implementation(libs.play.services.tflite.gpu)
 
     // Gson for JSON parsing
     implementation(libs.gson)
