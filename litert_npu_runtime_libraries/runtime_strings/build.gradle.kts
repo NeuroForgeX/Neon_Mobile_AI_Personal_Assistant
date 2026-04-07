@@ -5,4 +5,10 @@ android {
   compileSdk = 35
 
   defaultConfig { minSdk = 31 }
+
+  buildTypes {
+    debug {}
+    release {}
+    create("releaseCandidate") {}
+  }
 }

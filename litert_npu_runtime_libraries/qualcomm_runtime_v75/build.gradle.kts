@@ -6,6 +6,12 @@ android {
 
   defaultConfig { minSdk = 31 }
 
+  buildTypes {
+    debug {}
+    release {}
+    create("releaseCandidate") {}
+  }
+
   sourceSets {
     getByName("main") {
       // let gradle pack the shared library into apk

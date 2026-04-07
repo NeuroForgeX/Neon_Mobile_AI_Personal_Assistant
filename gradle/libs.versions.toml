@@ -56,7 +56,7 @@ ai-litert-gpu = { module = "io.github.google-ai-edge:litert-gpu-api", version.re
 litertlm-android = { module = "com.google.ai.edge.litertlm:litertlm-android", version.ref = "litert" }
 
 # LiteRT NPU Runtime Libraries
-litert-npu-runtime-strings = { module = "com.google.ai.edge.litert:litert-npu-runtime-strings", version.ref = "litert" }
+litert-npu-runtime-strings = { module = "com.google.ai.edge.litert:litert-npu-runtime-strings", version = "0.1.0" }
 
 # Google AI Edge LiteRT Libraries
 google-litert = { group = "com.google.ai.edge.litert", name = "litert", version.ref = "litert" }

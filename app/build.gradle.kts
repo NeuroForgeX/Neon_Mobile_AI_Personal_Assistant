@@ -147,11 +147,14 @@ dependencies {
     // Google AI Edge LiteRT Libraries
     implementation(libs.google.litert)
 
+    // 2. LiteRT Play Services Runtime (Standardizes hardware access)
+    implementation("com.google.android.gms:play-services-tflite-java:16.4.0")
+    
+    // 3. Play Services GPU Delegate (Fallback for MediaTek Mali GPU)
+    implementation("com.google.android.gms:play-services-tflite-gpu:16.2.0")
+
     // Strings for NPU runtime libraries
     implementation(project(":litert_npu_runtime_libraries:runtime_strings"))
-    
-    // Include the strings used by the NPU runtime modules
-    implementation(libs.litert.npu.runtime.strings)
 
     // Gson for JSON parsing
     implementation(libs.gson)
