@@ -123,3 +123,22 @@
     public java.lang.StringBuilder append(int);
     public java.lang.String toString();
 }
+
+# Keep TensorFlow Lite classes for Play Services compatibility
+-keep class org.tensorflow.lite.** { *; }
+-keep class org.tensorflow.lite.gpu.** { *; }
+-keep class org.tensorflow.lite.nnapi.** { *; }
+-keep class org.tensorflow.lite.delegate.** { *; }
+
+# Keep Play Services TensorFlow Lite classes
+-keep class com.google.android.gms.tflite.** { *; }
+-keep class com.google.android.gms.dynamic.** { *; }
+
+# Keep LiteRT classes
+-keep class com.google.ai.edge.litert.** { *; }
+-keep class com.google.ai.edge.litert.gpu.** { *; }
+-keep class com.google.ai.edge.litertlm.** { *; }
+
+# Don't warn about TensorFlow Lite related classes
+-dontwarn org.tensorflow.lite.**
+-dontwarn com.google.android.gms.tflite.**

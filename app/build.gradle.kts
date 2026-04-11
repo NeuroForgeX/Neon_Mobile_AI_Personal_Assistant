@@ -65,8 +65,8 @@ android {
 
         release {
             isDebuggable = false
-            isMinifyEnabled = true
-            isShrinkResources = true
+            isMinifyEnabled = false
+            isShrinkResources = false
             signingConfig = signingConfigs.getByName("release")
         }
 
@@ -142,11 +142,18 @@ dependencies {
     implementation(libs.google.litert)
 
     // 2. LiteRT Play Services Runtime (Standardizes hardware access)
-    implementation(libs.play.services.tflite.java)
+    implementation(libs.play.services.tflite.java) {
+        exclude(group = "org.tensorflow", module = "tensorflow-lite-api")
+        exclude(group = "org.tensorflow", module = "tensorflow-lite")
+    }
     
     // 3. Play Services GPU Delegate (Fallback for MediaTek Mali GPU)
-    implementation(libs.play.services.tflite.gpu)
-
+    implementation(libs.play.services.tflite.gpu) {
+        exclude(group = "org.tensorflow", module = "tensorflow-lite-api")
+        exclude(group = "org.tensorflow", module = "tensorflow-lite-gpu-api")
+        exclude(group = "org.tensorflow", module = "tensorflow-lite")
+    }
+    implementation(libs.play.services.tflite.acceleration.service)
     // Gson for JSON parsing
     implementation(libs.gson)
 

@@ -67,8 +67,8 @@
     <string name="my_happy_bot_folder">MyHappyBot</string>
     <string name="hello_file_content">Hello from MyHappyBot!</string>
     <string name="storage_permissions_not_granted">Storage permissions not granted</string>
-    <string name="folder_created_success">Folder \'%s\' created successfully at: %s</string>
-    <string name="folder_already_exists">Folder \'%s\' already exists at: %s</string>
+    <string name="folder_created_success" formatted="false">Folder \'%s\' created successfully at: %s</string>
+    <string name="folder_already_exists" formatted="false">Folder \'%s\' already exists at: %s</string>
     <string name="failed_create_folder">Failed to create folder \'%s\'</string>
     
     <!-- Database -->
