@@ -39,6 +39,6 @@ fun getModelDirectory(): String {
 
 const val REQUEST_STORAGE_PERMISSIONS = 101
 val STORAGE_PERMISSIONS = arrayOf(
-    Manifest.permission.READ_EXTERNAL_STORAGE,
-    Manifest.permission.WRITE_EXTERNAL_STORAGE
+    Manifest.permission.READ_MEDIA_IMAGES,
+    Manifest.permission.READ_MEDIA_VIDEO
 )

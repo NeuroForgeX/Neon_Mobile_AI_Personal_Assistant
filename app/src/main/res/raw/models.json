@@ -8,6 +8,20 @@
       "owner": "Microsoft",
       "name": "Phi-4-mini-instruct_multi-prefill-seq_q8_ekv4096.litertlm"
     },
+    "gemma-4-E4B-it": {
+      "shortName": "Gemma 4 - 4b",
+      "description": "gemma 4 E4B",
+      "size": "3.9 GB",
+      "owner": "Google",
+      "name": "gemma-4-E4B-it-int4.litertlm"
+    },
+    "gemma-4-E2B-it": {
+      "shortName": "Gemma 4 - 2b",
+      "description": "gemma 4 E2B",
+      "size": "2.8 GB",
+      "owner": "Google",
+      "name": "gemma-4-E2B-it-int2.litertlm"
+    },
     "Phi-4-mini-instruct_multi-prefill-seq_q8_ekv4096": {
       "shortName": "Phi 4 mini",
       "description": "Phi 4 mini instruct multi prefill",

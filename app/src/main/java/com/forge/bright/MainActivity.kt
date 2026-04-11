@@ -1,9 +1,6 @@
 package com.forge.bright
 
-import android.net.Uri
 import android.os.Bundle
-import android.provider.OpenableColumns.DISPLAY_NAME
-import android.provider.OpenableColumns.SIZE
 import android.util.Log
 import android.view.WindowInsets.Type
 import android.view.WindowInsets.Type.statusBars
@@ -134,21 +131,6 @@ class MainActivity : ComponentActivity() {
         window.insetsController?.setSystemBarsAppearance(APPEARANCE_LIGHT_STATUS_BARS, statusBars())
     }
 
-    private fun getFileDetails(uri: Uri) {
-        val projection = arrayOf(DISPLAY_NAME, SIZE)
-
-        contentResolver.query(uri, projection, null, null, null)?.use { cursor ->
-            if (cursor.moveToFirst()) {
-                val nameIndex = cursor.getColumnIndexOrThrow(DISPLAY_NAME)
-                val sizeIndex = cursor.getColumnIndexOrThrow(SIZE)
-
-                val fileName = cursor.getString(nameIndex)
-                val fileSize = cursor.getLong(sizeIndex) // size in bytes
-
-                Log.d(TAG, "Name: $fileName, Size: $fileSize bytes")
-            }
-        }
-    }
 }
 
 @Preview(showBackground = true)
@@ -159,7 +141,7 @@ fun MainActivityPreview() {
     ROUTE_CHAT = "chat"
     ROUTE_MODEL_SETUP = "model_setup"
     ROUTE_SETTINGS = "settings"
-    
+
     MyHappyBotTheme {
         Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
             val navController = rememberNavController()

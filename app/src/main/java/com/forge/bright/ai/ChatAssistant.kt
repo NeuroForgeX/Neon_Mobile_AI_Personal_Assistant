@@ -1,15 +1,17 @@
 package com.forge.bright.ai
 
 import android.content.Context
-import android.os.Build
 import android.util.Log
 import com.forge.bright.utils.FileTransferHelper.getInternalCacheDir
 import com.forge.bright.utils.PreferencesManager
 import com.google.ai.edge.litertlm.Backend
 import com.google.ai.edge.litertlm.Backend.NPU
+import com.google.ai.edge.litertlm.Content
 import com.google.ai.edge.litertlm.Conversation
+import com.google.ai.edge.litertlm.ConversationConfig
 import com.google.ai.edge.litertlm.Engine
 import com.google.ai.edge.litertlm.EngineConfig
+import com.google.ai.edge.litertlm.SamplerConfig
 import java.io.File
 
 private const val TAG = "ChatAssistant.kt"
@@ -39,12 +41,14 @@ object ChatAssistant {
                 throw IllegalArgumentException("Model file not found: $path")
             }
 
-            val engineConfig = EngineConfig(modelPath = path,
-                                            backend = NPU(context.applicationInfo.nativeLibraryDir),
-                                            cacheDir = getInternalCacheDir(context).path)
+            val engineConfig = EngineConfig(modelPath = path, backend = Backend.CPU(), cacheDir = getInternalCacheDir(context).path)
             engine = Engine(engineConfig)
             engine.initialize()
-            conversation = engine.createConversation()
+
+            // 1. Define your sampling parameters
+            val samplerConfig = SamplerConfig(topK = 40, topP = 0.95, temperature = 0.8)
+            val conversationConfig = ConversationConfig(samplerConfig = samplerConfig)
+            conversation = engine.createConversation(conversationConfig = conversationConfig)
             loaded = true
             Log.i(TAG, "Chat model loaded successfully from: $path")
         } catch (e: Exception) {

@@ -5,29 +5,14 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     
-    <!-- Storage permissions for model files - Android 11+ uses scoped storage -->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" 
-                     android:maxSdkVersion="32" />
+    <!-- Media storage permissions for accessing images and videos -->
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
     <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
-    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
     
-    <!-- All files access permission for Android 11+ (API 30+) -->
-    <uses-permission
-            android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
-            tools:ignore="AllFilesAccessPolicy,ScopedStorage" />
-            
-    <!-- Legacy storage access for Android 10 and below -->
-    <uses-permission
-            android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-            android:maxSdkVersion="28" />
+    <!-- Declare media access use case for Android 13+ -->
+    <uses-permission android:name="android.permission.READ_MEDIA_VISUAL_USER_SELECTED" />
     
-    <!-- Additional permissions for file access -->
-    <uses-permission
-            android:name="android.permission.WRITE_"
-            tools:ignore="SystemPermissionTypo" /> <!-- Wake lock for long-running operations -->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- System permissions -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 

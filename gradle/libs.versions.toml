@@ -12,6 +12,7 @@ espressoCore = "3.7.0"
 appcompat = "1.7.1"
 ketchVersion = "latest.release"
 litert = "latest.release"
+litertRuntimeVendorMediatek = "latest.release"
 material = "1.13.0"
 constraintlayout = "2.2.1"
 navigationCompose = "latest.release"
@@ -56,6 +57,7 @@ litert = { module = "io.github.google-ai-edge:litert", version.ref = "litert" }
 ai-litert-gpu = { module = "io.github.google-ai-edge:litert-gpu-api", version.ref = "litert" }
 
 # LiteRTLM (Language Model) Libraries
+litert-runtime-vendor-mediatek = { module = "com.google.ai.edge.litert:litert-runtime-vendor-mediatek", version.ref = "litertRuntimeVendorMediatek" }
 litertlm-android = { module = "com.google.ai.edge.litertlm:litertlm-android", version.ref = "litert" }
 
 # LiteRT NPU Runtime Libraries
