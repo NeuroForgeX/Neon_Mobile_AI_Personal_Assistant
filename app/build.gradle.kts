@@ -14,6 +14,12 @@ android {
         }
     }
 
+    dynamicFeatures.add(":litert_npu_runtime_libraries:mediatek_runtime")
+    dynamicFeatures.add(":litert_npu_runtime_libraries:qualcomm_runtime_v69")
+    dynamicFeatures.add(":litert_npu_runtime_libraries:qualcomm_runtime_v73")
+    dynamicFeatures.add(":litert_npu_runtime_libraries:qualcomm_runtime_v75")
+    dynamicFeatures.add(":litert_npu_runtime_libraries:qualcomm_runtime_v79")
+    dynamicFeatures.add(":litert_npu_runtime_libraries:qualcomm_runtime_v81")
     tasks.withType<JavaCompile>().configureEach {
         options.compilerArgs.addAll(listOf("-Xlint:none"))
     }
@@ -154,6 +160,10 @@ dependencies {
         exclude(group = "org.tensorflow", module = "tensorflow-lite")
     }
     implementation(libs.play.services.tflite.acceleration.service)
+
+    // Strings for NPU runtime libraries
+    implementation(project(":litert_npu_runtime_libraries:runtime_strings"))
+
     // Gson for JSON parsing
     implementation(libs.gson)
 
