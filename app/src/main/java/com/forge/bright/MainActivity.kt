@@ -32,7 +32,6 @@ import com.forge.bright.ui.theme.MyHappyBotTheme
 import com.forge.bright.utils.AppUtils
 import com.forge.bright.utils.PreferencesManager
 import com.forge.bright.utils.PreferencesManager.saveModelInformation
-import com.google.android.gms.tflite.java.TfLite
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
@@ -90,9 +89,6 @@ class MainActivity : ComponentActivity() {
             try {
                 // 1. Initialize PreferencesManager
                 PreferencesManager.initialize(this@MainActivity)
-
-                // 2. Initialize Play services LiteRT
-                initializeTfLite()
 
                 // 3. Initialize default models if needed
                 initializeModelsIfEmpty(this@MainActivity)
@@ -152,25 +148,6 @@ class MainActivity : ComponentActivity() {
                 Log.d(TAG, "Name: $fileName, Size: $fileSize bytes")
             }
         }
-    }
-
-    private fun initializeTfLite() {
-        // Initialize Play services LiteRT
-        val initializeTask = TfLite.initialize(this)
-
-        initializeTask.addOnSuccessListener {
-            // Initialization complete: you can now create your interpreter
-            Log.d(TAG, "Play services LiteRT initialized successfully")
-            setupInterpreter()
-        }.addOnFailureListener { e ->
-            Log.e(TAG, "Failed to initialize Play services runtime", e)
-        }
-    }
-
-    private fun setupInterpreter() {
-        // This method will be called after successful LiteRT initialization
-        // You can add any additional setup logic here if needed
-        Log.d(TAG, "Interpreter setup completed")
     }
 }
 

@@ -6,6 +6,7 @@ import android.util.Log
 import com.forge.bright.utils.FileTransferHelper.getInternalCacheDir
 import com.forge.bright.utils.PreferencesManager
 import com.google.ai.edge.litertlm.Backend
+import com.google.ai.edge.litertlm.Backend.NPU
 import com.google.ai.edge.litertlm.Conversation
 import com.google.ai.edge.litertlm.Engine
 import com.google.ai.edge.litertlm.EngineConfig
@@ -39,7 +40,7 @@ object ChatAssistant {
             }
 
             val engineConfig = EngineConfig(modelPath = path,
-                                            backend = Backend.GPU(),
+                                            backend = NPU(context.applicationInfo.nativeLibraryDir),
                                             cacheDir = getInternalCacheDir(context).path)
             engine = Engine(engineConfig)
             engine.initialize()

@@ -15,11 +15,11 @@ android {
     }
 
     dynamicFeatures.add(":litert_npu_runtime_libraries:mediatek_runtime")
-    dynamicFeatures.add(":litert_npu_runtime_libraries:qualcomm_runtime_v69")
-    dynamicFeatures.add(":litert_npu_runtime_libraries:qualcomm_runtime_v73")
-    dynamicFeatures.add(":litert_npu_runtime_libraries:qualcomm_runtime_v75")
-    dynamicFeatures.add(":litert_npu_runtime_libraries:qualcomm_runtime_v79")
-    dynamicFeatures.add(":litert_npu_runtime_libraries:qualcomm_runtime_v81")
+//    dynamicFeatures.add(":litert_npu_runtime_libraries:qualcomm_runtime_v69")
+//    dynamicFeatures.add(":litert_npu_runtime_libraries:qualcomm_runtime_v73")
+//    dynamicFeatures.add(":litert_npu_runtime_libraries:qualcomm_runtime_v75")
+//    dynamicFeatures.add(":litert_npu_runtime_libraries:qualcomm_runtime_v79")
+//    dynamicFeatures.add(":litert_npu_runtime_libraries:qualcomm_runtime_v81")
     tasks.withType<JavaCompile>().configureEach {
         options.compilerArgs.addAll(listOf("-Xlint:none"))
     }
@@ -46,6 +46,7 @@ android {
 
         ndk {
             // NPU only supports 64-bit ARM
+            //noinspection ChromeOsAbiSupport
             abiFilters += listOf("arm64-v8a")
         }
     }
@@ -89,6 +90,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_21
     }
 
+    //noinspection WrongGradleMethod
     kotlin {
         jvmToolchain(21)
     }
@@ -147,19 +149,19 @@ dependencies {
     // Google AI Edge LiteRT Libraries
     implementation(libs.google.litert)
 
-    // 2. LiteRT Play Services Runtime (Standardizes hardware access)
-    implementation(libs.play.services.tflite.java) {
-        exclude(group = "org.tensorflow", module = "tensorflow-lite-api")
-        exclude(group = "org.tensorflow", module = "tensorflow-lite")
-    }
-    
-    // 3. Play Services GPU Delegate (Fallback for MediaTek Mali GPU)
-    implementation(libs.play.services.tflite.gpu) {
-        exclude(group = "org.tensorflow", module = "tensorflow-lite-api")
-        exclude(group = "org.tensorflow", module = "tensorflow-lite-gpu-api")
-        exclude(group = "org.tensorflow", module = "tensorflow-lite")
-    }
-    implementation(libs.play.services.tflite.acceleration.service)
+//    // 2. LiteRT Play Services Runtime (Standardizes hardware access)
+//    implementation(libs.play.services.tflite.java) {
+//        exclude(group = "org.tensorflow", module = "tensorflow-lite-api")
+//        exclude(group = "org.tensorflow", module = "tensorflow-lite")
+//    }
+//
+//    // 3. Play Services GPU Delegate (Fallback for MediaTek Mali GPU)
+//    implementation(libs.play.services.tflite.gpu) {
+//        exclude(group = "org.tensorflow", module = "tensorflow-lite-api")
+//        exclude(group = "org.tensorflow", module = "tensorflow-lite-gpu-api")
+//        exclude(group = "org.tensorflow", module = "tensorflow-lite")
+//    }
+//    implementation(libs.play.services.tflite.acceleration.service)
 
     // Strings for NPU runtime libraries
     implementation(project(":litert_npu_runtime_libraries:runtime_strings"))
