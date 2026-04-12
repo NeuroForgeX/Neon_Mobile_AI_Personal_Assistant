@@ -30,6 +30,7 @@ import com.forge.bright.TYPING_INDICATOR
 import com.forge.bright.db.o.ChatMessage
 import com.forge.bright.db.o.MessageType
 import com.forge.bright.utils.DateUtils
+import dev.jeziellago.compose.markdowntext.MarkdownText
 
 private const val TAG = "ChatMessageUI.kt"
 
@@ -55,7 +56,9 @@ fun FromUserMessageUI(message: ChatMessage) {
                     .clip(RoundedCornerShape(16.dp))
                     .background(MaterialTheme.colorScheme.primary)
                     .padding(12.dp)) {
-                Text(text = message.message, color = MaterialTheme.colorScheme.onPrimary, fontSize = 16.sp)
+                MarkdownText(
+                    markdown = message.message,
+                )
             }
             Text(text = DateUtils.readableTime(message.timestamp), fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(top = 4.dp, end = 4.dp))
         }
@@ -70,7 +73,9 @@ fun FromAIMessageUI(message: ChatMessage) {
                     .clip(RoundedCornerShape(16.dp))
                     .background(MaterialTheme.colorScheme.secondaryContainer)
                     .padding(12.dp)) {
-                Text(text = message.message, color = MaterialTheme.colorScheme.onSecondaryContainer, fontSize = 16.sp)
+                MarkdownText(
+                    markdown = message.message,
+                )
             }
             Text(text = DateUtils.readableTime(message.timestamp), fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(top = 4.dp, start = 4.dp))
         }
@@ -160,7 +165,9 @@ fun DynamicTypingNotificationMessageUI(message: ChatMessage) {
 @Composable
 fun FromUserMessageUIPreview() {
     MaterialTheme {
-        FromUserMessageUI(ChatMessage(topicId = 1, message = "Hello! This is a user message.", messageType = MessageType.FROM_USER))
+        FromUserMessageUI(ChatMessage(topicId = 1,
+                                      message = "**Hello!** This is a *user message* with `code` and\n\n- Bullet points\n- **Bold text**\n- *Italic text*",
+                                      messageType = MessageType.FROM_USER))
     }
 }
 
@@ -168,7 +175,9 @@ fun FromUserMessageUIPreview() {
 @Composable
 fun FromAIMessageUIPreview() {
     MaterialTheme {
-        FromAIMessageUI(ChatMessage(topicId = 1, message = "Hello! This is an AI response.", messageType = MessageType.FROM_AI))
+        FromAIMessageUI(ChatMessage(topicId = 1,
+                                    message = "**Hello!** This is an *AI response* with:\n\n```kotlin\nfun example() {\n    return Hello World\n}\n```\n\nAnd [links](https://example.com) work too!",
+                                    messageType = MessageType.FROM_AI))
     }
 }
 

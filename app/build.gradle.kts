@@ -144,24 +144,8 @@ dependencies {
     // Google AI Edge LiteRT Libraries
     implementation(libs.google.litert)
 
-//    // 2. LiteRT Play Services Runtime (Standardizes hardware access)
-//    implementation(libs.play.services.tflite.java) {
-//        exclude(group = "org.tensorflow", module = "tensorflow-lite-api")
-//        exclude(group = "org.tensorflow", module = "tensorflow-lite")
-//    }
-//
-//    // 3. Play Services GPU Delegate (Fallback for MediaTek Mali GPU)
-//    implementation(libs.play.services.tflite.gpu) {
-//        exclude(group = "org.tensorflow", module = "tensorflow-lite-api")
-//        exclude(group = "org.tensorflow", module = "tensorflow-lite-gpu-api")
-//        exclude(group = "org.tensorflow", module = "tensorflow-lite")
-//    }
-//    implementation(libs.play.services.tflite.acceleration.service)
-
     // Strings for NPU runtime libraries
-//    implementation(project(":litert_npu_runtime_libraries:runtime_strings"))
 //    implementation(libs.litert.npu.runtime.strings)
-
 //    implementation(libs.litert.runtime.vendor.mediatek)
 
     // Gson for JSON parsing
@@ -171,6 +155,9 @@ dependencies {
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
     ksp(libs.room.compiler)
+
+    // Markdown for Compose
+    implementation(libs.markdown.compose)
 
     testImplementation(libs.junit)
     testImplementation(libs.mockito.core)

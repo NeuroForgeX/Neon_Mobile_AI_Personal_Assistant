@@ -29,6 +29,7 @@ gson = "latest.release"
 room = "latest.release"
 lifecycleRuntimeKtx = "latest.release"
 mockito = "latest.release"
+markdownCompose = "latest.release"
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
@@ -87,6 +88,9 @@ androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-
 androidx-compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 mockito-core = { group = "org.mockito", name = "mockito-core", version.ref = "mockito" }
 mockito-inline = { group = "org.mockito", name = "mockito-inline", version.ref = "mockito" }
+
+# Markdown for Compose
+markdown-compose = { module = "com.github.jeziellago:compose-markdown", version.ref = "markdownCompose" }
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
