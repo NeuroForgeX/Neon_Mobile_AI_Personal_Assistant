@@ -1,13 +1,13 @@
 <resources>
     <!-- App Info -->
     <string name="app_name">MyHappyBot</string>
-    
+
     <!-- Navigation -->
     <string name="nav_home">Home</string>
     <string name="nav_chat">Chat</string>
     <string name="nav_models">Models</string>
     <string name="nav_settings">Settings</string>
-    
+
     <!-- Main Screen -->
     <string name="welcome_title">Welcome to MyHappyBot</string>
     <string name="welcome_subtitle">Your AI assistant companion</string>
@@ -16,30 +16,30 @@
     <string name="feature_multiple_models">• Multiple model support</string>
     <string name="feature_offline">• Offline capabilities</string>
     <string name="feature_settings">• Customizable settings</string>
-    
+
     <!-- Chat Screen -->
     <string name="type_message_hint">Type a message...</string>
     <string name="send_message_desc">Send message</string>
     <string name="sending_message">Sending...</string>
     <string name="error_ai_response">Error getting AI response: %s</string>
-    
+
     <!-- Model Setup -->
     <string name="setup_ai_models">Setup AI Models</string>
     <string name="download_phi_3_model">Download Phi-3 Model</string>
     <string name="select_local_gguf_file">Select Local GGUF File</string>
     <string name="go_to_chat">Go to Chat</string>
     <string name="select_an_option_to_get_started">Select an option to get started</string>
-    
+
     <!-- Model Items -->
     <string name="available_local">Available in local</string>
     <string name="download_now">Download now</string>
     <string name="download_icon_desc">Download icon</string>
     <string name="download_progress_completed">%d%% completed</string>
-    
+
     <!-- Chat Messages -->
     <string name="seen">Seen</string>
     <string name="typing_indicator">typing...</string>
-    
+
     <!-- Settings Screen -->
     <string name="settings_title">Settings</string>
     <string name="general_settings">General Settings</string>
@@ -51,18 +51,18 @@
     <string name="storage_desc">Manage downloaded models and data</string>
     <string name="about_title">About</string>
     <string name="about_desc">App version and information</string>
-    
+
     <!-- Date/Time -->
     <string name="now">now</string>
     <string name="today">Today</string>
     <string name="yesterday">Yesterday</string>
-    
+
     <!-- Permissions -->
     <string name="storage_permissions_required">Storage permissions are required for this app to work properly</string>
     <string name="all_permissions_granted">All permissions already granted</string>
     <string name="permission_granted">granted</string>
     <string name="permission_denied">denied</string>
-    
+
     <!-- App Utils -->
     <string name="my_happy_bot_folder">MyHappyBot</string>
     <string name="hello_file_content">Hello from MyHappyBot!</string>
@@ -70,19 +70,19 @@
     <string name="folder_created_success" formatted="false">Folder \'%s\' created successfully at: %s</string>
     <string name="folder_already_exists" formatted="false">Folder \'%s\' already exists at: %s</string>
     <string name="failed_create_folder">Failed to create folder \'%s\'</string>
-    
+
     <!-- Database -->
     <string name="conversation_database_name">conversation_database</string>
-    
+
     <!-- Splash Screen -->
     <string name="title_activity_splash_screen">SplashScreenActivity</string>
-    
+
     <!-- Navigation Routes -->
     <string name="route_main">main</string>
     <string name="route_chat">chat</string>
     <string name="route_model_setup">model_setup</string>
     <string name="route_settings">settings</string>
-    
+
     <!-- Log Tags -->
     <string name="log_main_activity">MainActivity</string>
     <string name="log_app_navigation">AppNavigation</string>

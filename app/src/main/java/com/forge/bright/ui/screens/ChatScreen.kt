@@ -102,7 +102,10 @@ fun ChatScreen(navController: NavHostController) {
                         scope.launch {
                             try {
                                 withContext(Dispatchers.Main) {
-                                    val response = ChatAssistant.chat(message.message)
+                                    // Switch to IO thread for the DB query
+                                    val response = withContext(Dispatchers.Default) {
+                                        ChatAssistant.chat(message.message)
+                                    }
                                     messages = insertChatMessage(ChatMessage(topicId = 0, message = response, messageType = MessageType.FROM_AI), messages)
                                 }
                             } catch (e: Exception) {

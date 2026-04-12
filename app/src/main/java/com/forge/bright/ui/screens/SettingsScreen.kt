@@ -34,64 +34,36 @@ private const val TAG = "SettingsScreen.kt"
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen() {
-    Column(
-        modifier = Modifier
+    Column(modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
-    ) {
-        Text(
-            text = SETTINGS_TITLE,
-            fontSize = 28.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.primary
-        )
-        
+            .padding(16.dp)) {
+        Text(text = SETTINGS_TITLE, fontSize = 28.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
+
         Spacer(modifier = Modifier.height(24.dp))
-        
-        Card(
-            modifier = Modifier.fillMaxWidth(),
-            elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
-        ) {
-            Column(
-                modifier = Modifier.padding(16.dp)
-            ) {
-                Text(
-                    text = GENERAL_SETTINGS,
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Medium
-                )
-                
+
+        Card(modifier = Modifier.fillMaxWidth(), elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)) {
+            Column(modifier = Modifier.padding(16.dp)) {
+                Text(text = GENERAL_SETTINGS, fontSize = 20.sp, fontWeight = FontWeight.Medium)
+
                 Spacer(modifier = Modifier.height(16.dp))
-                
+
                 // Model Settings
-                SettingsItem(
-                    title = MODEL_CONFIGURATION_TITLE,
-                    description = MODEL_CONFIGURATION_DESC
-                )
-                
+                SettingsItem(title = MODEL_CONFIGURATION_TITLE, description = MODEL_CONFIGURATION_DESC)
+
                 HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
-                
+
                 // Theme Settings
-                SettingsItem(
-                    title = APPEARANCE_TITLE,
-                    description = APPEARANCE_DESC
-                )
-                
+                SettingsItem(title = APPEARANCE_TITLE, description = APPEARANCE_DESC)
+
                 HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
-                
+
                 // Storage Settings
-                SettingsItem(
-                    title = STORAGE_TITLE,
-                    description = STORAGE_DESC
-                )
-                
+                SettingsItem(title = STORAGE_TITLE, description = STORAGE_DESC)
+
                 HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
-                
+
                 // About Settings
-                SettingsItem(
-                    title = ABOUT_TITLE,
-                    description = ABOUT_DESC
-                )
+                SettingsItem(title = ABOUT_TITLE, description = ABOUT_DESC)
             }
         }
     }
@@ -99,24 +71,13 @@ fun SettingsScreen() {
 
 @Composable
 fun SettingsItem(
-    title: String,
-    description: String
-) {
-    Column(
-        modifier = Modifier
+    title: String, description: String
+                ) {
+    Column(modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 8.dp)
-    ) {
-        Text(
-            text = title,
-            fontSize = 16.sp,
-            fontWeight = FontWeight.Medium
-        )
-        Text(
-            text = description,
-            fontSize = 14.sp,
-            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
-        )
+            .padding(vertical = 8.dp)) {
+        Text(text = title, fontSize = 16.sp, fontWeight = FontWeight.Medium)
+        Text(text = description, fontSize = 14.sp, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f))
     }
 }
 

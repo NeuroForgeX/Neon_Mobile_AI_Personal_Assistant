@@ -5,8 +5,6 @@ import android.util.Log
 import com.forge.bright.utils.FileTransferHelper.getInternalCacheDir
 import com.forge.bright.utils.PreferencesManager
 import com.google.ai.edge.litertlm.Backend
-import com.google.ai.edge.litertlm.Backend.NPU
-import com.google.ai.edge.litertlm.Content
 import com.google.ai.edge.litertlm.Conversation
 import com.google.ai.edge.litertlm.ConversationConfig
 import com.google.ai.edge.litertlm.Engine
@@ -78,5 +76,6 @@ object ChatAssistant {
         preferences.modelInternalFilePath?.let { filepath ->
             load(context, filepath)
         }
+
     }
 }

@@ -93,13 +93,13 @@ var LOG_APP_UTILS: String = ""
 fun loadStringResources(context: Context) {
     // App Info
     APP_NAME = context.getString(R.string.app_name)
-    
+
     // Navigation
     NAV_HOME = context.getString(R.string.nav_home)
     NAV_CHAT = context.getString(R.string.nav_chat)
     NAV_MODELS = context.getString(R.string.nav_models)
     NAV_SETTINGS = context.getString(R.string.nav_settings)
-    
+
     // Main Screen
     WELCOME_TITLE = context.getString(R.string.welcome_title)
     WELCOME_SUBTITLE = context.getString(R.string.welcome_subtitle)
@@ -108,30 +108,30 @@ fun loadStringResources(context: Context) {
     FEATURE_MULTIPLE_MODELS = context.getString(R.string.feature_multiple_models)
     FEATURE_OFFLINE = context.getString(R.string.feature_offline)
     FEATURE_SETTINGS = context.getString(R.string.feature_settings)
-    
+
     // Chat Screen
     TYPE_MESSAGE_HINT = context.getString(R.string.type_message_hint)
     SEND_MESSAGE_DESC = context.getString(R.string.send_message_desc)
     SENDING_MESSAGE = context.getString(R.string.sending_message)
     ERROR_AI_RESPONSE = context.getString(R.string.error_ai_response)
-    
+
     // Model Setup
     SETUP_AI_MODELS = context.getString(R.string.setup_ai_models)
     DOWNLOAD_PHI_3_MODEL = context.getString(R.string.download_phi_3_model)
     SELECT_LOCAL_GGUF_FILE = context.getString(R.string.select_local_gguf_file)
     GO_TO_CHAT = context.getString(R.string.go_to_chat)
     SELECT_AN_OPTION_TO_GET_STARTED = context.getString(R.string.select_an_option_to_get_started)
-    
+
     // Model Items
     AVAILABLE_LOCAL = context.getString(R.string.available_local)
     DOWNLOAD_NOW = context.getString(R.string.download_now)
     DOWNLOAD_ICON_DESC = context.getString(R.string.download_icon_desc)
     DOWNLOAD_PROGRESS_COMPLETED = context.getString(R.string.download_progress_completed)
-    
+
     // Chat Messages
     SEEN = context.getString(R.string.seen)
     TYPING_INDICATOR = context.getString(R.string.typing_indicator)
-    
+
     // Settings Screen
     SETTINGS_TITLE = context.getString(R.string.settings_title)
     GENERAL_SETTINGS = context.getString(R.string.general_settings)
@@ -143,18 +143,18 @@ fun loadStringResources(context: Context) {
     STORAGE_DESC = context.getString(R.string.storage_desc)
     ABOUT_TITLE = context.getString(R.string.about_title)
     ABOUT_DESC = context.getString(R.string.about_desc)
-    
+
     // Date/Time
     NOW = context.getString(R.string.now)
     TODAY = context.getString(R.string.today)
     YESTERDAY = context.getString(R.string.yesterday)
-    
+
     // Permissions
     STORAGE_PERMISSIONS_REQUIRED = context.getString(R.string.storage_permissions_required)
     ALL_PERMISSIONS_GRANTED = context.getString(R.string.all_permissions_granted)
     PERMISSION_GRANTED = context.getString(R.string.permission_granted)
     PERMISSION_DENIED = context.getString(R.string.permission_denied)
-    
+
     // App Utils
     MY_HAPPY_BOT_FOLDER = context.getString(R.string.my_happy_bot_folder)
     HELLO_FILE_CONTENT = context.getString(R.string.hello_file_content)
@@ -162,19 +162,19 @@ fun loadStringResources(context: Context) {
     FOLDER_CREATED_SUCCESS = context.getString(R.string.folder_created_success)
     FOLDER_ALREADY_EXISTS = context.getString(R.string.folder_already_exists)
     FAILED_CREATE_FOLDER = context.getString(R.string.failed_create_folder)
-    
+
     // Database
     CONVERSATION_DATABASE_NAME = context.getString(R.string.conversation_database_name)
-    
+
     // Splash Screen
     TITLE_ACTIVITY_SPLASH_SCREEN = context.getString(R.string.title_activity_splash_screen)
-    
+
     // Navigation Routes
     ROUTE_MAIN = context.getString(R.string.route_main)
     ROUTE_CHAT = context.getString(R.string.route_chat)
     ROUTE_MODEL_SETUP = context.getString(R.string.route_model_setup)
     ROUTE_SETTINGS = context.getString(R.string.route_settings)
-    
+
     // Log Tags
     LOG_MAIN_ACTIVITY = context.getString(R.string.log_main_activity)
     LOG_APP_NAVIGATION = context.getString(R.string.log_app_navigation)

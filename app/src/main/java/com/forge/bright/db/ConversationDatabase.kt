@@ -37,7 +37,7 @@ class DebugDatabase : ConversationDatabase() {
     override fun topicDao(): TopicDao = MockTopicDao()
     override fun chatMessageDao(): ChatMessageDao = MockChatMessageDao()
     override fun modelDao(): ModelDao = MockModelDao()
-    
+
     override fun createInvalidationTracker(): InvalidationTracker {
         TODO("Not yet implemented")
     }

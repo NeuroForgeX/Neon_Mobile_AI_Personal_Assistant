@@ -141,17 +141,8 @@ fun DynamicTypingNotificationMessageUI(message: ChatMessage) {
     Box(modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 8.dp, vertical = 4.dp), contentAlignment = Alignment.CenterStart) {
-        Row(
-            modifier = Modifier.padding(12.dp),
-            verticalAlignment = Alignment.Bottom,
-            horizontalArrangement = Arrangement.spacedBy(2.dp)
-        ) {
-            Text(
-                text = TYPING_INDICATOR,
-                fontSize = 14.sp, 
-                color = MaterialTheme.colorScheme.onSecondaryContainer,
-                fontStyle = FontStyle.Italic
-            )
+        Row(modifier = Modifier.padding(12.dp), verticalAlignment = Alignment.Bottom, horizontalArrangement = Arrangement.spacedBy(2.dp)) {
+            Text(text = TYPING_INDICATOR, fontSize = 14.sp, color = MaterialTheme.colorScheme.onSecondaryContainer, fontStyle = FontStyle.Italic)
             // Typing indicator dots
             repeat(3) { index ->
                 val delay = index * 100

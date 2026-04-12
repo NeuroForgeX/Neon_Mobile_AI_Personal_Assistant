@@ -18,20 +18,17 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.compose.rememberNavController
-import com.forge.bright.ai.ChatAssistant.isLoaded
 import com.forge.bright.ai.ChatAssistant.load
 import com.forge.bright.db.DataAccess
-import com.forge.bright.db.DataAccess.getAllModels
-import com.forge.bright.db.DefaultData.initializeModelsIfEmpty
-import com.forge.bright.db.o.Model
+import com.forge.bright.db.DefaultData.initializeModelInformationFromDbIfEmpty
 import com.forge.bright.ui.navigation.AppNavigation
 import com.forge.bright.ui.theme.MyHappyBotTheme
 import com.forge.bright.utils.AppUtils
 import com.forge.bright.utils.PreferencesManager
-import com.forge.bright.utils.PreferencesManager.saveModelInformation
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 private const val SPLASH_MIN_DURATION = 2000L // 2 seconds minimum
 private const val TAG = "MainActivity.kt"
@@ -39,7 +36,6 @@ private const val TAG = "MainActivity.kt"
 class MainActivity : ComponentActivity() {
     // Track if initialization is complete
     private var isReady = false
-    private var hasOfflineModel = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,7 +69,7 @@ class MainActivity : ComponentActivity() {
                         if (hasModelConfigured && isReady) {
                             load(this@MainActivity, PreferencesManager)
                         }
-                    }, skipSplash = false, startWithChat = hasOfflineModel)
+                    })
                 }
             }
         }
@@ -88,16 +84,10 @@ class MainActivity : ComponentActivity() {
                 PreferencesManager.initialize(this@MainActivity)
 
                 // 3. Initialize default models if needed
-                initializeModelsIfEmpty(this@MainActivity)
+                initializeModelInformationFromDbIfEmpty(this@MainActivity)
 
-                load(this@MainActivity, PreferencesManager)
-                if (!isLoaded()) {
-                    val models: List<Model> = getAllModels().first()
-                    val availableModel = models.firstOrNull { it.localFilePath.trim().isNotEmpty() }
-                    availableModel?.let { model ->
-                        saveModelInformation(model)
-                        load(this@MainActivity, PreferencesManager)
-                    }
+                withContext(Dispatchers.Default) {
+                    load(this@MainActivity, PreferencesManager)
                 }
 
                 // 6. Wait for minimum splash duration
@@ -112,7 +102,6 @@ class MainActivity : ComponentActivity() {
             } catch (e: Exception) {
                 // Handle any initialization errors
                 Log.d(TAG, "", e)
-                hasOfflineModel = false
                 isReady = true
             }
         }
@@ -145,7 +134,7 @@ fun MainActivityPreview() {
     MyHappyBotTheme {
         Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
             val navController = rememberNavController()
-            AppNavigation(navController = navController, onModelConfigCheck = { _ -> }, skipSplash = true, startWithChat = false)
+            AppNavigation(navController = navController, onModelConfigCheck = { _ -> })
         }
     }
 }

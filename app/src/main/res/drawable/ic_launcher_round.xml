@@ -1,67 +1,67 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="108dp"
-    android:height="108dp"
-    android:viewportWidth="108"
-    android:viewportHeight="108">
-    
+        android:width="108dp"
+        android:height="108dp"
+        android:viewportWidth="108"
+        android:viewportHeight="108">
+
     <!-- Perfect circle background -->
     <path
-        android:fillColor="#2196F3"
-        android:pathData="M54,0 C83.823,0 108,24.177 108,54 C108,83.823 83.823,108 54,108 C24.177,108 0,83.823 0,54 C0,24.177 24.177,0 54,0 Z" />
-    
+            android:fillColor="#2196F3"
+            android:pathData="M54,0 C83.823,0 108,24.177 108,54 C108,83.823 83.823,108 54,108 C24.177,108 0,83.823 0,54 C0,24.177 24.177,0 54,0 Z" />
+
     <!-- Inner circle for depth -->
     <path
-        android:fillColor="#1976D2"
-        android:pathData="M54,6 C80.509,6 102,27.491 102,54 C102,80.509 80.509,102 54,102 C27.491,102 6,80.509 6,54 C6,27.491 27.491,6 54,6 Z" />
-    
+            android:fillColor="#1976D2"
+            android:pathData="M54,6 C80.509,6 102,27.491 102,54 C102,80.509 80.509,102 54,102 C27.491,102 6,80.509 6,54 C6,27.491 27.491,6 54,6 Z" />
+
     <!-- Chat bubble with rounded corners -->
     <path
-        android:fillColor="#FFFFFF"
-        android:pathData="M28,32 C28,27.582 31.582,24 36,24 L72,24 C76.418,24 80,27.582 80,32 L80,68 C80,72.418 76.418,76 72,76 L44,76 L32,86 L32,76 L36,76 C31.582,76 28,72.418 28,68 L28,32 Z" />
-    
+            android:fillColor="#FFFFFF"
+            android:pathData="M28,32 C28,27.582 31.582,24 36,24 L72,24 C76.418,24 80,27.582 80,32 L80,68 C80,72.418 76.418,76 72,76 L44,76 L32,86 L32,76 L36,76 C31.582,76 28,72.418 28,68 L28,32 Z" />
+
     <!-- Chat bubble tail -->
     <path
-        android:fillColor="#FFFFFF"
-        android:pathData="M32,76 L32,86 L44,76 Z" />
-    
+            android:fillColor="#FFFFFF"
+            android:pathData="M32,76 L32,86 L44,76 Z" />
+
     <!-- Central AI/Brain icon -->
     <circle
-        android:fillColor="#1976D2"
-        android:pathData="M54,40 C58.418,40 62,43.582 62,48 C62,50.837 60.424,53.305 58,54.5 L58,62 L50,62 L50,54.5 C47.576,53.305 46,50.837 46,48 C46,43.582 49.582,40 54,40 Z" />
-    
+            android:fillColor="#1976D2"
+            android:pathData="M54,40 C58.418,40 62,43.582 62,48 C62,50.837 60.424,53.305 58,54.5 L58,62 L50,62 L50,54.5 C47.576,53.305 46,50.837 46,48 C46,43.582 49.582,40 54,40 Z" />
+
     <!-- Neural network lines -->
     <path
-        android:fillColor="#FFFFFF"
-        android:strokeWidth="2"
-        android:strokeColor="#FFFFFF"
-        android:pathData="M40,52 L48,46 M60,46 L68,52 M40,60 L48,56 M60,56 L68,60 M54,46 L54,54" />
-    
+            android:fillColor="#FFFFFF"
+            android:strokeWidth="2"
+            android:strokeColor="#FFFFFF"
+            android:pathData="M40,52 L48,46 M60,46 L68,52 M40,60 L48,56 M60,56 L68,60 M54,46 L54,54" />
+
     <!-- Neural network nodes -->
     <circle
-        android:fillColor="#FFFFFF"
-        android:pathData="M40,52 m-2,0 a2,2 0,1 1,4 0 a2,2 0,1 1,-4 0" />
+            android:fillColor="#FFFFFF"
+            android:pathData="M40,52 m-2,0 a2,2 0,1 1,4 0 a2,2 0,1 1,-4 0" />
     <circle
-        android:fillColor="#FFFFFF"
-        android:pathData="M68,52 m-2,0 a2,2 0,1 1,4 0 a2,2 0,1 1,-4 0" />
+            android:fillColor="#FFFFFF"
+            android:pathData="M68,52 m-2,0 a2,2 0,1 1,4 0 a2,2 0,1 1,-4 0" />
     <circle
-        android:fillColor="#FFFFFF"
-        android:pathData="M40,60 m-2,0 a2,2 0,1 1,4 0 a2,2 0,1 1,-4 0" />
+            android:fillColor="#FFFFFF"
+            android:pathData="M40,60 m-2,0 a2,2 0,1 1,4 0 a2,2 0,1 1,-4 0" />
     <circle
-        android:fillColor="#FFFFFF"
-        android:pathData="M68,60 m-2,0 a2,2 0,1 1,4 0 a2,2 0,1 1,-4 0" />
+            android:fillColor="#FFFFFF"
+            android:pathData="M68,60 m-2,0 a2,2 0,1 1,4 0 a2,2 0,1 1,-4 0" />
     <circle
-        android:fillColor="#FFFFFF"
-        android:pathData="M54,54 m-2,0 a2,2 0,1 1,4 0 a2,2 0,1 1,-4 0" />
-    
+            android:fillColor="#FFFFFF"
+            android:pathData="M54,54 m-2,0 a2,2 0,1 1,4 0 a2,2 0,1 1,-4 0" />
+
     <!-- "AI" text indicator -->
     <path
-        android:fillColor="#FFFFFF"
-        android:pathData="M38,82 L42,82 L42,90 L38,90 Z" />
+            android:fillColor="#FFFFFF"
+            android:pathData="M38,82 L42,82 L42,90 L38,90 Z" />
     <path
-        android:fillColor="#FFFFFF"
-        android:pathData="M46,82 L50,82 L50,86 L52,86 L52,82 L56,82 L56,90 L52,90 L52,88 L50,88 L50,90 L46,90 Z" />
+            android:fillColor="#FFFFFF"
+            android:pathData="M46,82 L50,82 L50,86 L52,86 L52,82 L56,82 L56,90 L52,90 L52,88 L50,88 L50,90 L46,90 Z" />
     <path
-        android:fillColor="#FFFFFF"
-        android:pathData="M60,82 L64,82 L64,88 L66,88 L66,90 L60,90 Z" />
-    
+            android:fillColor="#FFFFFF"
+            android:pathData="M60,82 L64,82 L64,88 L66,88 L66,90 L60,90 Z" />
+
 </vector>

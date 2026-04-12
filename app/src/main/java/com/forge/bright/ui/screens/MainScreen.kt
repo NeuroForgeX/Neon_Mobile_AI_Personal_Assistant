@@ -32,45 +32,23 @@ private const val TAG = "MainScreen.kt"
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen() {
-    Column(
-        modifier = Modifier
+    Column(modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Text(
-            text = WELCOME_TITLE,
-            fontSize = 28.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.primary
-        )
-        
+            .padding(16.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
+        Text(text = WELCOME_TITLE, fontSize = 28.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
+
         Spacer(modifier = Modifier.height(16.dp))
-        
-        Text(
-            text = WELCOME_SUBTITLE,
-            fontSize = 18.sp,
-            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
-        )
-        
+
+        Text(text = WELCOME_SUBTITLE, fontSize = 18.sp, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f))
+
         Spacer(modifier = Modifier.height(32.dp))
-        
-        Card(
-            modifier = Modifier.fillMaxWidth(),
-            elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
-        ) {
-            Column(
-                modifier = Modifier.padding(16.dp)
-            ) {
-                Text(
-                    text = FEATURES_TITLE,
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Medium
-                )
-                
+
+        Card(modifier = Modifier.fillMaxWidth(), elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)) {
+            Column(modifier = Modifier.padding(16.dp)) {
+                Text(text = FEATURES_TITLE, fontSize = 20.sp, fontWeight = FontWeight.Medium)
+
                 Spacer(modifier = Modifier.height(8.dp))
-                
+
                 Text(FEATURE_AI_CHAT)
                 Text(FEATURE_MULTIPLE_MODELS)
                 Text(FEATURE_OFFLINE)

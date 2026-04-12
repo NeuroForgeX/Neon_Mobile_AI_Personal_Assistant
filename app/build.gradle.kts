@@ -26,12 +26,7 @@ android {
 
     tasks.withType<KotlinCompile>().configureEach {
         compilerOptions {
-            freeCompilerArgs.addAll(
-                listOf(
-                    "-Xskip-primitive-version-checks",
-                    "-Xskip-metadata-version-check"
-                )
-            )
+            freeCompilerArgs.addAll(listOf("-Xskip-primitive-version-checks", "-Xskip-metadata-version-check"))
         }
     }
 
@@ -136,7 +131,7 @@ dependencies {
     implementation(libs.androidx.compose.material.icons.extended)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.navigation.compose)
-    
+
     // Splash Screen API
     implementation(libs.androidx.core.splashscreen)
 

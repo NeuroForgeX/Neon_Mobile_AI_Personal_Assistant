@@ -1,17 +1,17 @@
 plugins { id("com.android.dynamic-feature") }
 
 android {
-  namespace = "com.google.ai.edge.litert.google_tensor_runtime"
-  compileSdk = 35
+    namespace = "com.google.ai.edge.litert.google_tensor_runtime"
+    compileSdk = 35
 
-  defaultConfig { minSdk = 31 }
+    defaultConfig { minSdk = 31 }
 
-  sourceSets {
-    getByName("main") {
-      // let gradle pack the shared library into apk
-      jniLibs.srcDirs("src/main/jni")
+    sourceSets {
+        getByName("main") {
+            // let gradle pack the shared library into apk
+            jniLibs.srcDirs("src/main/jni")
+        }
     }
-  }
 }
 
 dependencies { implementation(project(":app")) }

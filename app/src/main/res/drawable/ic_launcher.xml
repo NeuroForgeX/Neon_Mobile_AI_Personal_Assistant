@@ -1,58 +1,58 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="108dp"
-    android:height="108dp"
-    android:viewportWidth="108"
-    android:viewportHeight="108">
-    
+        android:width="108dp"
+        android:height="108dp"
+        android:viewportWidth="108"
+        android:viewportHeight="108">
+
     <!-- Background circle with gradient -->
     <path
-        android:fillColor="#2196F3"
-        android:pathData="M54,0 C83.823,0 108,24.177 108,54 C108,83.823 83.823,108 54,108 C24.177,108 0,83.823 0,54 C0,24.177 24.177,0 54,0 Z" />
-    
+            android:fillColor="#2196F3"
+            android:pathData="M54,0 C83.823,0 108,24.177 108,54 C108,83.823 83.823,108 54,108 C24.177,108 0,83.823 0,54 C0,24.177 24.177,0 54,0 Z" />
+
     <!-- Inner gradient overlay -->
     <path
-        android:fillColor="#1976D2"
-        android:pathData="M54,8 C78.853,8 99,28.147 99,53 C99,77.853 78.853,98 54,98 C29.147,98 9,77.853 9,53 C9,28.147 29.147,8 54,8 Z" />
-    
+            android:fillColor="#1976D2"
+            android:pathData="M54,8 C78.853,8 99,28.147 99,53 C99,77.853 78.853,98 54,98 C29.147,98 9,77.853 9,53 C9,28.147 29.147,8 54,8 Z" />
+
     <!-- Chat bubble icon -->
     <path
-        android:fillColor="#FFFFFF"
-        android:pathData="M30,35 C30,31.134 33.134,28 37,28 L71,28 C74.866,28 78,31.134 78,35 L78,65 C78,68.866 74.866,72 71,72 L45,72 L35,80 L35,72 L37,72 C33.134,72 30,68.866 30,65 L30,35 Z" />
-    
+            android:fillColor="#FFFFFF"
+            android:pathData="M30,35 C30,31.134 33.134,28 37,28 L71,28 C74.866,28 78,31.134 78,35 L78,65 C78,68.866 74.866,72 71,72 L45,72 L35,80 L35,72 L37,72 C33.134,72 30,68.866 30,65 L30,35 Z" />
+
     <!-- Chat bubble tail -->
     <path
-        android:fillColor="#FFFFFF"
-        android:pathData="M35,72 L35,80 L45,72 Z" />
-    
+            android:fillColor="#FFFFFF"
+            android:pathData="M35,72 L35,80 L45,72 Z" />
+
     <!-- AI/Brain icon inside chat bubble -->
     <path
-        android:fillColor="#1976D2"
-        android:pathData="M54,38 C57.314,38 60,40.686 60,44 C60,46.209 58.805,48.126 57,49.001 L57,56 L51,56 L51,49.001 C49.195,48.126 48,46.209 48,44 C48,40.686 50.686,38 54,38 Z" />
-    
+            android:fillColor="#1976D2"
+            android:pathData="M54,38 C57.314,38 60,40.686 60,44 C60,46.209 58.805,48.126 57,49.001 L57,56 L51,56 L51,49.001 C49.195,48.126 48,46.209 48,44 C48,40.686 50.686,38 54,38 Z" />
+
     <!-- Neural network connections -->
     <path
-        android:fillColor="#FFFFFF"
-        android:strokeWidth="1.5"
-        android:strokeColor="#FFFFFF"
-        android:pathData="M42,50 L48,46 M60,46 L66,50 M42,58 L48,54 M60,54 L66,58 M54,44 L54,50" />
-    
+            android:fillColor="#FFFFFF"
+            android:strokeWidth="1.5"
+            android:strokeColor="#FFFFFF"
+            android:pathData="M42,50 L48,46 M60,46 L66,50 M42,58 L48,54 M60,54 L66,58 M54,44 L54,50" />
+
     <!-- Small dots representing AI nodes -->
     <circle
-        android:fillColor="#FFFFFF"
-        android:pathData="M42,50 m-1.5,0 a1.5,1.5 0,1 1,3 0 a1.5,1.5 0,1 1,-3 0" />
+            android:fillColor="#FFFFFF"
+            android:pathData="M42,50 m-1.5,0 a1.5,1.5 0,1 1,3 0 a1.5,1.5 0,1 1,-3 0" />
     <circle
-        android:fillColor="#FFFFFF"
-        android:pathData="M66,50 m-1.5,0 a1.5,1.5 0,1 1,3 0 a1.5,1.5 0,1 1,-3 0" />
+            android:fillColor="#FFFFFF"
+            android:pathData="M66,50 m-1.5,0 a1.5,1.5 0,1 1,3 0 a1.5,1.5 0,1 1,-3 0" />
     <circle
-        android:fillColor="#FFFFFF"
-        android:pathData="M42,58 m-1.5,0 a1.5,1.5 0,1 1,3 0 a1.5,1.5 0,1 1,-3 0" />
+            android:fillColor="#FFFFFF"
+            android:pathData="M42,58 m-1.5,0 a1.5,1.5 0,1 1,3 0 a1.5,1.5 0,1 1,-3 0" />
     <circle
-        android:fillColor="#FFFFFF"
-        android:pathData="M66,58 m-1.5,0 a1.5,1.5 0,1 1,3 0 a1.5,1.5 0,1 1,-3 0" />
-    
+            android:fillColor="#FFFFFF"
+            android:pathData="M66,58 m-1.5,0 a1.5,1.5 0,1 1,3 0 a1.5,1.5 0,1 1,-3 0" />
+
     <!-- App name text (optional, can be removed) -->
     <path
-        android:fillColor="#FFFFFF"
-        android:pathData="M35,85 L73,85 L73,90 L35,90 Z" />
-    
+            android:fillColor="#FFFFFF"
+            android:pathData="M35,85 L73,85 L73,90 L35,90 Z" />
+
 </vector>

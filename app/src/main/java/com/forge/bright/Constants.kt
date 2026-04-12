@@ -29,8 +29,7 @@ fun hasPreferredModelExtension(path: Any): Boolean {
 }
 
 fun getModelDirectoryAbsolutePath(): String {
-    return Paths.get(Environment.getExternalStorageDirectory().toString(), getModelDirectory())
-        .toAbsolutePath().toString()
+    return Paths.get(Environment.getExternalStorageDirectory().toString(), getModelDirectory()).toAbsolutePath().toString()
 }
 
 fun getModelDirectory(): String {
@@ -38,7 +37,4 @@ fun getModelDirectory(): String {
 }
 
 const val REQUEST_STORAGE_PERMISSIONS = 101
-val STORAGE_PERMISSIONS = arrayOf(
-    Manifest.permission.READ_MEDIA_IMAGES,
-    Manifest.permission.READ_MEDIA_VIDEO
-)
+val STORAGE_PERMISSIONS = arrayOf(Manifest.permission.READ_MEDIA_IMAGES, Manifest.permission.READ_MEDIA_VIDEO)

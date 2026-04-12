@@ -71,7 +71,7 @@ fun ModelSetupScreenContent(models: List<Model>, onNavigateToChat: () -> Unit) {
                 Spacer(modifier = Modifier.height(16.dp))
 
                 for (model in models) {
-                    if(model.isOfflineDownloaded()) {
+                    if (model.isOfflineDownloaded()) {
                         DebugLocalModelItem(model)
                         continue
                     }
@@ -109,12 +109,7 @@ fun ModelSetupScreenContentPreview() {
                                         owner = "Microsoft",
                                         localFilePath = "file:///models/phi3-mini.gguf",
                                         type = GGUF),
-                                  Model(name = "GPT-4.gguf",
-                                        shortName = "gpt4",
-                                        description = "Large language model requiring download",
-                                        size = "13GB",
-                                        owner = "OpenAI",
-                                        type = GGUF))
+                                  Model(name = "GPT-4.gguf", shortName = "gpt4", description = "Large language model requiring download", size = "13GB", owner = "OpenAI", type = GGUF))
         ModelSetupScreenContent(models = sampleModels, onNavigateToChat = {})
     }
 }

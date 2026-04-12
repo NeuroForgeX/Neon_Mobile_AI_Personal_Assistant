@@ -44,36 +44,26 @@ import com.forge.bright.utils.PreferencesManager.hasModelConfigured
 
 private const val TAG = "AppNavigation.kt"
 
-data class BottomNavItem(
-    val title: String, val icon: ImageVector, val route: String
-                        )
+data class BottomNavItem(val title: String, val icon: ImageVector, val route: String)
 
 @Composable
-fun AppNavigation(
-    navController: NavHostController = rememberNavController(), onModelConfigCheck: (Boolean) -> Unit, skipSplash: Boolean = false, startWithChat: Boolean = false
-                 ) {
+fun AppNavigation(navController: NavHostController = rememberNavController(), onModelConfigCheck: (Boolean) -> Unit) {
     LocalContext.current
 
     LaunchedEffect(Unit) {
-        if (!skipSplash) {
-            val hasModelConfigured = hasModelConfigured()
-            onModelConfigCheck(hasModelConfigured)
+        val hasModelConfigured = hasModelConfigured()
+        onModelConfigCheck(hasModelConfigured)
 
-            if (!hasModelConfigured) {
-                Log.d(TAG, "No model configured, navigating to setup")
-                navController.navigate(ROUTE_MODEL_SETUP) {
-                    popUpTo(ROUTE_MAIN) { inclusive = false }
-                }
+        if (!hasModelConfigured) {
+            Log.d(TAG, "No model configured, navigating to setup")
+            navController.navigate(ROUTE_MODEL_SETUP) {
+                popUpTo(ROUTE_MAIN) { inclusive = false }
             }
         }
     }
 
-    // Determine start destination based on splash screen logic
-    val startDestination = when {
-        skipSplash && startWithChat -> ROUTE_CHAT
-        skipSplash && !startWithChat -> ROUTE_MODEL_SETUP
-        else -> ROUTE_MAIN
-    }
+    // Start destination is always main screen
+    val startDestination = ROUTE_MAIN
 
     val bottomNavItems = listOf(BottomNavItem(NAV_HOME, Icons.Filled.Home, ROUTE_MAIN),
                                 BottomNavItem(NAV_CHAT, Icons.Filled.Chat, ROUTE_CHAT),
@@ -135,6 +125,6 @@ fun AppNavigationPreview() {
         if (isPreview) {
             DataAccess.initializeDebug()
         }
-        AppNavigation(navController = rememberNavController(), onModelConfigCheck = { _ -> }, skipSplash = true, startWithChat = false)
+        AppNavigation(navController = rememberNavController(), onModelConfigCheck = { _ -> })
     }
 }

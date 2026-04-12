@@ -16,7 +16,7 @@ object DefaultData {
     /**
      * Check if models table exists and has data, populate from JSON if empty
      */
-    suspend fun initializeModelsIfEmpty(context: Context) {
+    suspend fun initializeModelInformationFromDbIfEmpty(context: Context) {
         val database = ConversationDatabase.getDatabase(context)
         withContext(Dispatchers.IO) {
             try {

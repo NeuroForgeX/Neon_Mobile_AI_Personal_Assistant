@@ -21,7 +21,7 @@ private val DarkColorScheme = darkColorScheme(
     onTertiary = Color.White,
     onBackground = Color.White,
     onSurface = Color.White,
-)
+                                             )
 
 private val LightColorScheme = lightColorScheme(
     primary = Color(0xFF6200EE),
@@ -34,13 +34,12 @@ private val LightColorScheme = lightColorScheme(
     onTertiary = Color.White,
     onBackground = Color(0xFF1C1B1F),
     onSurface = Color(0xFF1C1B1F),
-)
+                                               )
 
 @Composable
 fun MyHappyBotTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
-    content: @Composable () -> Unit
-) {
+    darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit
+                   ) {
     val isPreview = LocalInspectionMode.current
     val colorScheme = when {
         isPreview -> LightColorScheme
@@ -48,9 +47,5 @@ fun MyHappyBotTheme(
         else -> LightColorScheme
     }
 
-    MaterialTheme(
-        colorScheme = colorScheme,
-        typography = Typography,
-        content = content
-    )
+    MaterialTheme(colorScheme = colorScheme, typography = Typography, content = content)
 }
