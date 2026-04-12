@@ -122,6 +122,7 @@ fun ChatScreen(navController: NavHostController) {
     var messages by remember { mutableStateOf(listOf<ChatMessage>()) }
     var messageText by remember { mutableStateOf("") }
     val listState = rememberLazyListState()
+    var isTyping by remember { mutableStateOf(false) }
 
     // Auto-scroll to bottom when new messages are added
     LaunchedEffect(messages.size) {
@@ -138,6 +139,10 @@ fun ChatScreen(navController: NavHostController) {
             }
         }
 
+        // Typing animation card - shown only when isTyping is true
+        if (isTyping) {
+            TypingAnimationCard()
+        }
         // Input area
         Surface(shadowElevation = 8.dp, modifier = Modifier.fillMaxWidth()) {
             Row(modifier = Modifier
@@ -155,6 +160,7 @@ fun ChatScreen(navController: NavHostController) {
                         val message = ChatMessage(topicId = 0, message = messageText.trim(), messageType = MessageType.FROM_USER)
                         messageText = ""
                         messages = insertChatMessage(message, messages)
+                        isTyping = true
                         // Get AI response
                         scope.launch {
                             try {
@@ -163,9 +169,11 @@ fun ChatScreen(navController: NavHostController) {
                                     val response = withContext(Dispatchers.Default) {
                                         ChatAssistant.chat(message.message)
                                     }
+                                    isTyping = false
                                     messages = insertChatMessage(ChatMessage(topicId = 0, message = response, messageType = MessageType.FROM_AI), messages)
                                 }
                             } catch (e: Exception) {
+                                isTyping = false
                                 withContext(Dispatchers.Main) {
                                     val errorMessageText = ERROR_AI_RESPONSE.format(e.message)
                                     val errorMessage = ChatMessage(topicId = 0, message = errorMessageText, messageType = MessageType.STATIC_ERROR_NOTIFICATION)
@@ -187,8 +195,6 @@ fun ChatScreen(navController: NavHostController) {
 fun ChatScreenPreview() {
     MyHappyBotTheme {
         ChatScreenContentPreview()
-        TypingAnimationCard()
-
     }
 }
 
