@@ -1,6 +1,6 @@
 <resources>
     <!-- App Info -->
-    <string name="app_name">MyHappyBot</string>
+    <string name="app_name">AI Personal Assistant</string>
 
     <!-- Navigation -->
     <string name="nav_home">Home</string>
@@ -9,8 +9,8 @@
     <string name="nav_settings">Settings</string>
 
     <!-- Main Screen -->
-    <string name="welcome_title">Welcome to MyHappyBot</string>
-    <string name="welcome_subtitle">Your AI assistant companion</string>
+    <string name="welcome_title">Welcome to AI Personal Assistant</string>
+    <string name="welcome_subtitle">Your offline AI assistant companion</string>
     <string name="features_title">Features:</string>
     <string name="feature_ai_chat">• AI-powered chat assistance</string>
     <string name="feature_multiple_models">• Multiple model support</string>
@@ -38,7 +38,7 @@
 
     <!-- Chat Messages -->
     <string name="seen">Seen</string>
-    <string name="typing_indicator">typing...</string>
+    <string name="typing_indicator">typing </string>
 
     <!-- Settings Screen -->
     <string name="settings_title">Settings</string>
@@ -63,28 +63,4 @@
     <string name="permission_granted">granted</string>
     <string name="permission_denied">denied</string>
 
-    <!-- App Utils -->
-    <string name="my_happy_bot_folder">MyHappyBot</string>
-    <string name="hello_file_content">Hello from MyHappyBot!</string>
-    <string name="storage_permissions_not_granted">Storage permissions not granted</string>
-    <string name="folder_created_success" formatted="false">Folder \'%s\' created successfully at: %s</string>
-    <string name="folder_already_exists" formatted="false">Folder \'%s\' already exists at: %s</string>
-    <string name="failed_create_folder">Failed to create folder \'%s\'</string>
-
-    <!-- Database -->
-    <string name="conversation_database_name">conversation_database</string>
-
-    <!-- Splash Screen -->
-    <string name="title_activity_splash_screen">SplashScreenActivity</string>
-
-    <!-- Navigation Routes -->
-    <string name="route_main">main</string>
-    <string name="route_chat">chat</string>
-    <string name="route_model_setup">model_setup</string>
-    <string name="route_settings">settings</string>
-
-    <!-- Log Tags -->
-    <string name="log_main_activity">MainActivity</string>
-    <string name="log_app_navigation">AppNavigation</string>
-    <string name="log_app_utils">AppUtils</string>
-</resources>
+    </resources>

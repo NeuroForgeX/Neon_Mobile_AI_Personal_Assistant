@@ -30,10 +30,7 @@ import com.forge.bright.NAV_CHAT
 import com.forge.bright.NAV_HOME
 import com.forge.bright.NAV_MODELS
 import com.forge.bright.NAV_SETTINGS
-import com.forge.bright.ROUTE_CHAT
-import com.forge.bright.ROUTE_MAIN
-import com.forge.bright.ROUTE_MODEL_SETUP
-import com.forge.bright.ROUTE_SETTINGS
+import com.forge.bright.NavigationRoute
 import com.forge.bright.db.DataAccess
 import com.forge.bright.ui.screens.ChatScreen
 import com.forge.bright.ui.screens.MainScreen
@@ -56,19 +53,19 @@ fun AppNavigation(navController: NavHostController = rememberNavController(), on
 
         if (!hasModelConfigured) {
             Log.d(TAG, "No model configured, navigating to setup")
-            navController.navigate(ROUTE_MODEL_SETUP) {
-                popUpTo(ROUTE_MAIN) { inclusive = false }
+            navController.navigate(NavigationRoute.MODEL_SETUP.route) {
+                popUpTo(NavigationRoute.MAIN.route) { inclusive = false }
             }
         }
     }
 
     // Start destination is always main screen
-    val startDestination = ROUTE_MAIN
+    val startDestination = NavigationRoute.MAIN.route
 
-    val bottomNavItems = listOf(BottomNavItem(NAV_HOME, Icons.Filled.Home, ROUTE_MAIN),
-                                BottomNavItem(NAV_CHAT, Icons.Filled.Chat, ROUTE_CHAT),
-                                BottomNavItem(NAV_MODELS, Icons.Filled.Download, ROUTE_MODEL_SETUP),
-                                BottomNavItem(NAV_SETTINGS, Icons.Filled.Settings, ROUTE_SETTINGS))
+    val bottomNavItems = listOf(BottomNavItem(NAV_HOME, Icons.Filled.Home, NavigationRoute.MAIN.route),
+                                BottomNavItem(NAV_CHAT, Icons.Filled.Chat, NavigationRoute.CHAT.route),
+                                BottomNavItem(NAV_MODELS, Icons.Filled.Download, NavigationRoute.MODEL_SETUP.route),
+                                BottomNavItem(NAV_SETTINGS, Icons.Filled.Settings, NavigationRoute.SETTINGS.route))
 
     Scaffold(bottomBar = {
         NavigationBar {
@@ -89,16 +86,16 @@ fun AppNavigation(navController: NavHostController = rememberNavController(), on
         }
     }) { paddingValues ->
         NavHost(navController = navController, startDestination = startDestination, modifier = Modifier.padding(paddingValues)) {
-            composable(ROUTE_MAIN) {
+            composable(NavigationRoute.MAIN.route) {
                 MainScreen()
             }
-            composable(ROUTE_CHAT) {
+            composable(NavigationRoute.CHAT.route) {
                 ChatScreen(navController = navController)
             }
-            composable(ROUTE_MODEL_SETUP) {
+            composable(NavigationRoute.MODEL_SETUP.route) {
                 ModelSetupScreen(navController = navController)
             }
-            composable(ROUTE_SETTINGS) {
+            composable(NavigationRoute.SETTINGS.route) {
                 SettingsScreen()
             }
         }
@@ -108,12 +105,7 @@ fun AppNavigation(navController: NavHostController = rememberNavController(), on
 @Preview(showBackground = true)
 @Composable
 fun AppNavigationPreview() {
-    // Initialize routes for preview
-    ROUTE_MAIN = "main"
-    ROUTE_CHAT = "chat"
-    ROUTE_MODEL_SETUP = "model_setup"
-    ROUTE_SETTINGS = "settings"
-
+    
     // Initialize navigation titles for preview
     NAV_HOME = "Home"
     NAV_CHAT = "Chat"

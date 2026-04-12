@@ -40,7 +40,7 @@ var DOWNLOAD_PROGRESS_COMPLETED: String = ""
 
 // Chat Messages
 var SEEN: String = ""
-var TYPING_INDICATOR: String = ""
+var TYPING_INDICATOR: String = "typing "
 
 // Settings Screen
 var SETTINGS_TITLE: String = ""
@@ -66,29 +66,17 @@ var PERMISSION_GRANTED: String = ""
 var PERMISSION_DENIED: String = ""
 
 // App Utils
-var MY_HAPPY_BOT_FOLDER: String = ""
-var HELLO_FILE_CONTENT: String = ""
-var STORAGE_PERMISSIONS_NOT_GRANTED: String = ""
-var FOLDER_CREATED_SUCCESS: String = ""
-var FOLDER_ALREADY_EXISTS: String = ""
-var FAILED_CREATE_FOLDER: String = ""
 
 // Database
-var CONVERSATION_DATABASE_NAME: String = ""
 
 // Splash Screen
-var TITLE_ACTIVITY_SPLASH_SCREEN: String = ""
 
 // Navigation Routes
-var ROUTE_MAIN: String = ""
-var ROUTE_CHAT: String = ""
-var ROUTE_MODEL_SETUP: String = ""
-var ROUTE_SETTINGS: String = ""
+enum class NavigationRoute(val route: String) {
+    MAIN("main"), CHAT("chat"), MODEL_SETUP("model_setup"), SETTINGS("settings")
+}
 
 // Log Tags
-var LOG_MAIN_ACTIVITY: String = ""
-var LOG_APP_NAVIGATION: String = ""
-var LOG_APP_UTILS: String = ""
 
 fun loadStringResources(context: Context) {
     // App Info
@@ -156,27 +144,12 @@ fun loadStringResources(context: Context) {
     PERMISSION_DENIED = context.getString(R.string.permission_denied)
 
     // App Utils
-    MY_HAPPY_BOT_FOLDER = context.getString(R.string.my_happy_bot_folder)
-    HELLO_FILE_CONTENT = context.getString(R.string.hello_file_content)
-    STORAGE_PERMISSIONS_NOT_GRANTED = context.getString(R.string.storage_permissions_not_granted)
-    FOLDER_CREATED_SUCCESS = context.getString(R.string.folder_created_success)
-    FOLDER_ALREADY_EXISTS = context.getString(R.string.folder_already_exists)
-    FAILED_CREATE_FOLDER = context.getString(R.string.failed_create_folder)
 
     // Database
-    CONVERSATION_DATABASE_NAME = context.getString(R.string.conversation_database_name)
 
     // Splash Screen
-    TITLE_ACTIVITY_SPLASH_SCREEN = context.getString(R.string.title_activity_splash_screen)
 
     // Navigation Routes
-    ROUTE_MAIN = context.getString(R.string.route_main)
-    ROUTE_CHAT = context.getString(R.string.route_chat)
-    ROUTE_MODEL_SETUP = context.getString(R.string.route_model_setup)
-    ROUTE_SETTINGS = context.getString(R.string.route_settings)
 
     // Log Tags
-    LOG_MAIN_ACTIVITY = context.getString(R.string.log_main_activity)
-    LOG_APP_NAVIGATION = context.getString(R.string.log_app_navigation)
-    LOG_APP_UTILS = context.getString(R.string.log_app_utils)
 }

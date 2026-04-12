@@ -125,12 +125,7 @@ class MainActivity : ComponentActivity() {
 @Preview(showBackground = true)
 @Composable
 fun MainActivityPreview() {
-    // Initialize routes for preview
-    ROUTE_MAIN = "main"
-    ROUTE_CHAT = "chat"
-    ROUTE_MODEL_SETUP = "model_setup"
-    ROUTE_SETTINGS = "settings"
-
+    
     MyHappyBotTheme {
         Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
             val navController = rememberNavController()

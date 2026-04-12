@@ -1,5 +1,11 @@
 package com.forge.bright.ui.screens
 
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.StartOffset
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -12,7 +18,9 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Send
+import androidx.compose.material.icons.automirrored.filled.Send
+import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material.icons.filled.Stop
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -29,12 +37,14 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.forge.bright.ERROR_AI_RESPONSE
-import com.forge.bright.SEEN
 import com.forge.bright.SEND_MESSAGE_DESC
 import com.forge.bright.TYPE_MESSAGE_HINT
 import com.forge.bright.TYPING_INDICATOR
@@ -49,11 +59,59 @@ import kotlinx.coroutines.withContext
 
 private const val TAG = "ChatScreen.kt"
 
-fun insertChatMessage(message: ChatMessage, messages: MutableList<ChatMessage>): MutableList<ChatMessage> {
+fun insertChatMessage(message: ChatMessage, messages: List<ChatMessage>): List<ChatMessage> {
     val updatedMessages = messages.toMutableList()
     updatedMessages.add(message)
     updatedMessages.sortBy { it.timestamp }
     return updatedMessages
+}
+
+@Composable
+fun TypingAnimationCard() {
+    val transition = rememberInfiniteTransition(label = "typing")
+    val dots = listOf(0, 1, 2)
+
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp, vertical = 8.dp),
+        horizontalArrangement = Arrangement.Start,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(
+            text = TYPING_INDICATOR,
+            color = MaterialTheme.colorScheme.onSecondaryContainer,
+            fontSize = 14.sp,
+            fontStyle = FontStyle.Italic
+        )
+
+        // Animated dots using PulsatingDots logic
+        Row(horizontalArrangement = Arrangement.spacedBy(2.dp)) {
+            dots.forEach { index ->
+                val scale by transition.animateFloat(
+                    initialValue = 0.5f,
+                    targetValue = 1f,
+                    animationSpec = infiniteRepeatable(
+                        animation = tween(600),
+                        repeatMode = RepeatMode.Reverse,
+                        initialStartOffset = StartOffset(index * 200) // Staggered delay
+                    ),
+                    label = "scale"
+                )
+                Text(
+                    text = ".",
+                    modifier = Modifier.graphicsLayer {
+                        scaleX = scale
+                        scaleY = scale
+                        alpha = scale
+                    },
+                    color = MaterialTheme.colorScheme.onSecondaryContainer,
+                    fontSize = 14.sp,
+                    fontStyle = FontStyle.Italic
+                )
+            }
+        }
+    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -61,8 +119,7 @@ fun insertChatMessage(message: ChatMessage, messages: MutableList<ChatMessage>):
 fun ChatScreen(navController: NavHostController) {
     LocalContext.current
     val scope = rememberCoroutineScope()
-
-    var messages by remember { mutableStateOf(mutableListOf<ChatMessage>()) }
+    var messages by remember { mutableStateOf(listOf<ChatMessage>()) }
     var messageText by remember { mutableStateOf("") }
     val listState = rememberLazyListState()
 
@@ -118,7 +175,7 @@ fun ChatScreen(navController: NavHostController) {
                         }
                     }
                 }) {
-                    Icon(imageVector = Icons.Default.Send, contentDescription = SEND_MESSAGE_DESC, tint = MaterialTheme.colorScheme.primary)
+                    Icon(imageVector = Icons.AutoMirrored.Filled.Send, contentDescription = SEND_MESSAGE_DESC, tint = MaterialTheme.colorScheme.primary)
                 }
             }
         }
@@ -130,23 +187,23 @@ fun ChatScreen(navController: NavHostController) {
 fun ChatScreenPreview() {
     MyHappyBotTheme {
         ChatScreenContentPreview()
+        TypingAnimationCard()
+
     }
 }
 
 @Composable
 private fun ChatScreenContentPreview() {
-    val typingIndicator = TYPING_INDICATOR
-    val seen = SEEN
     var messages by remember {
         mutableStateOf(listOf(ChatMessage(message = "Hello! How can I help you today?", topicId = 0, messageType = MessageType.FROM_AI),
                               ChatMessage(message = "I need help with my Android app", topicId = 0, messageType = MessageType.FROM_USER),
                               ChatMessage(message = "I'd be happy to help! What specific issue are you facing?", topicId = 0, messageType = MessageType.FROM_AI),
                               ChatMessage(message = "Technical Error occurred", topicId = 0, messageType = MessageType.STATIC_ERROR_NOTIFICATION),
-                              ChatMessage(message = typingIndicator, topicId = 0, messageType = MessageType.DYNAMIC_TYPING_NOTIFICATION),
-                              ChatMessage(message = seen, topicId = 0, messageType = MessageType.DYNAMIC_SEEN_NOTIFICATION),
+                              ChatMessage(message = "Seen", topicId = 0, messageType = MessageType.DYNAMIC_SEEN_NOTIFICATION),
                               ChatMessage(message = "Sent", topicId = 0, messageType = MessageType.DYNAMIC_SEND_NOTIFICATION)))
     }
     var messageText by remember { mutableStateOf("") }
+    var isTyping by remember { mutableStateOf(false) }
     val listState = rememberLazyListState()
 
     Column(modifier = Modifier.fillMaxSize()) {
@@ -155,7 +212,12 @@ private fun ChatScreenContentPreview() {
                 ChatMessageItem(message)
             }
         }
-
+        
+        // Typing animation card - shown only when isTyping is true
+        if (isTyping) {
+            TypingAnimationCard()
+        }
+        
         Surface(shadowElevation = 8.dp, modifier = Modifier.fillMaxWidth()) {
             Row(modifier = Modifier
                     .fillMaxWidth()
@@ -168,9 +230,20 @@ private fun ChatScreenContentPreview() {
                                   shape = RoundedCornerShape(24.dp))
 
                 IconButton(onClick = {}) {
-                    Icon(imageVector = Icons.Default.Send, contentDescription = SEND_MESSAGE_DESC, tint = MaterialTheme.colorScheme.primary)
+                    Icon(imageVector = Icons.AutoMirrored.Filled.Send, contentDescription = SEND_MESSAGE_DESC, tint = MaterialTheme.colorScheme.primary)
+                }
+                
+                // Demo buttons for typing control
+                IconButton(onClick = { isTyping = !isTyping }) {
+                    Icon(
+                        imageVector = if (isTyping) Icons.Default.Stop else Icons.Default.PlayArrow,
+                        contentDescription = if (isTyping) "Stop typing" else "Start typing",
+                        tint = if (isTyping) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary
+                    )
                 }
             }
         }
     }
 }
+
+
